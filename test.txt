@@ -1,0 +1,2 @@
+EHLO coco
+QUIT

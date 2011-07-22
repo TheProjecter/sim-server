@@ -1,0 +1,41 @@
+
+<rules port="23" mode="TCP">
+	<state id="0" >
+
+	
+	
+		<condition regex="GET (.*)\n" >
+				<action name="SendMessage" arg1="_@G=1_@G=1@  "></action>
+				<action name="SetVar" arg1="var1" arg2="@G=1_"></action>
+		</condition>
+		<condition regex="salut\n" >
+		  
+			<action name="SendMessage" arg1=" @IP ->> _@ID  ->_@R \n  date -> _@D \nstate-> _@S @V=var1_  "></action>
+			<action name="CloseConnection"/>
+			<action name="StoreFile" arg1="test.txt"></action>
+			
+		</condition>
+		<condition regex="test\n" >
+		<action name="PipeWith" arg1="127.0.0.1" arg2="30"></action>
+		</condition>
+		
+		
+	
+	</state>
+	<state id="1">
+ 
+		<condition regex="" tostate="2">
+			<action name="Close" />
+		</condition>
+			<!-- 
+		<condition regex="play:(.*)\n">
+			<action name="PlaySound" arg1="test.wav" />
+			<action name="SendMessage" arg1="en lecture" />
+			<action name="SendMessage" arg1="@1" />
+			<action name="SendFile" arg1="proto1.xml" />
+			<action name="Exec" />
+		</condition>
+		-->
+	</state>
+</rules>
+
