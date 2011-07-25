@@ -73,61 +73,13 @@ public class Condition {
 					}
 					
 					/*
-				 if(action=="SendFile"){
-						
-						String  file = ValParam(i, m, 0,plc);
-						System.out.println("ENVOI!");
-						new PipeFromFile(plc.os,file);
-					
 
-					}else if (action=="GetConnected"){
-					}else if (action=="SetIdname"){
-						String id_candidat=ValParam(i, m, 0,plc);
-						if(plc.ls.is_IDlibre(id_candidat))plc.idname=id_candidat;
-					}else if (action=="StoreFile"){
-						plc.pipeWithFile(ValParam(i, m, 0,plc), "\n");
-					}else if (action=="Exec"){
-
-						String  cmd = ValParam(i, m, 0,plc);
-						System.out.println("cmd:"+cmd);
-						try {
-							System.out.println("runtime");
-							Runtime r = Runtime.getRuntime();
-							Process p = r.exec(cmd);
-							System.out.println("wait");
-							//p.waitFor();//si l'application doit attendre a ce que ce process fini
-							boolean returnOutput=false;
-
-
-							InputStream in = p.getInputStream();
-							int c = 0;
-							while ((c= in.read()) !=-1)	if (returnOutput)plc.os.write(c);
-
-						}catch(Exception e) {
-							System.out.println("erreur d'execution " + cmd + e.toString());
-							
-						}
-								System.out.println("fin de l'execution");
-
-
-				
-					}else if (action=="PlaySound"){
-						
-						new PlaySound(ValParam(i, m, 0,plc)).start();
-						
 					}else if (action=="PipeWith"){
 						
 						try {//si le cast ne passe pas
 							plc.pipeWithServer(ValParam(i, m, 0,plc),Integer.parseInt(ValParam(i, m, 1,plc)));//rajouter ce que l'on doit envoyer en premier
 						} catch (Exception e) {		}
-						
-				
-					}else if (action=="SetVar"){
-						plc.variables.put(ValParam(i, m, 0,plc), ValParam(i, m, 1,plc))	;
-					}else if(action=="SetHashVar"){
-						plc.variables.put(ValParam(i, m, 0,plc), ""+ValParam(i, m, 1,plc).hashCode())	;
-					}else{
-						System.out.println("fonction non implementé : "+action);
+	
 					}
 					*/
 				}

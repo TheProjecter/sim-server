@@ -22,11 +22,11 @@ public class ListenerClient implements Runnable{
 	public LinkedList<OutputStream> outs =new LinkedList<OutputStream>();
 	/**Le flux de sortie*/
 	public OutputStream os;
-	ListenerServer ls;
+	public ListenerServer ls;
 	String buffer="";
 	private int etat=0;    //pour les protocoles
 	private String idname=""; //pour l'aspect session//pourrai être inclus dans les variables
-	private Map<String, String> variables = new HashMap<String,String>();//pour l'aspect algo
+	public Map<String, String> variables = new HashMap<String,String>();//pour l'aspect algo
 
 	public ListenerClient(Socket psock,ListenerServer pls) {
 		this.setSock(psock);

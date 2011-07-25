@@ -13,7 +13,8 @@ public abstract class  Actionnable extends Thread{
 //thread usage is not mandatory
 	Actions actions;
 
-
+	ManageAction ma;
+	
 	public Actionnable(Actions pactions) {
 		actions= pactions;
 	}
