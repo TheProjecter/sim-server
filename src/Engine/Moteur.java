@@ -17,7 +17,7 @@ public class Moteur extends JFrame{
 		//generer Conditions
 		LinkedList<Condition> protocol;
 		try {
-			GenerateProtocol gp= new GenerateProtocol("saveMail.xml");
+			GenerateProtocol gp= new GenerateProtocol("HttpCatchCrawler.xml");
 			protocol = gp.getCondition();
 			
 			System.out.println("nombre de regle:"+protocol.size());

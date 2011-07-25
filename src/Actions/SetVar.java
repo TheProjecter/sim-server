@@ -17,6 +17,10 @@ public class SetVar extends Actionnable {
 	public void start(ListenerClient plc,Matcher m) {
 		try {
 			plc.variables.put(ValParam( m, 0,plc,actions), ValParam( m, 1,plc,actions))	;
+			
+			System.out.println("put"+ValParam( m, 0,plc,actions));
+			System.out.println(ValParam( m, 1,plc,actions));
+			
 		} catch (Exception e) {
 		
 			e.printStackTrace();

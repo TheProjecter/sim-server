@@ -20,7 +20,7 @@ public class SendFile  extends Actionnable{
 			System.out.println("ENVOI!");
 			new PipeFromFile(plc.os,file);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 		}
 	

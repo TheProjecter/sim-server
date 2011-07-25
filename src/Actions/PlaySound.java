@@ -36,7 +36,7 @@ public class PlaySound extends Actionnable {
     @Override
     public void start(ListenerClient plc, Matcher m) {
  
-    	super.start(plc, m);
+    	
     	String wavfile;
 		try {
 			wavfile = ValParam( m, 0,plc,actions);

@@ -26,7 +26,7 @@ public abstract class  Actionnable extends Thread{
 
 	public void start(ListenerClient plc,Matcher m){
 
-		System.out.println("not implemented function");
+		System.out.println("not implemented function ");
 	}
 
 
@@ -35,7 +35,12 @@ public abstract class  Actionnable extends Thread{
 	public String ValParam(Matcher mregex,int numparam,ListenerClient plc,Actions actions) throws Exception{
 
 
-
+/*
+ * 
+ * order of these replacement is important
+ * 
+ */
+		
 		String pmes= actions.getParam(numparam);
 
 		pmes=	pmes.replaceAll("@@", "/@%²");
@@ -79,7 +84,7 @@ public abstract class  Actionnable extends Thread{
 			isolement="";
 			while( i!=pmes.length() &&pmes.charAt(i)!='_')i++;
 			isolement=pmes.substring(m1.end(),i);
-
+System.out.println("replace @G="+isolement+ "by "+ mregex.group(isolement.charAt(0)-48));
 			ntest=ntest.replaceAll("@G="+isolement+"_", mregex.group(isolement.charAt(0)-48));
 		}
 
