@@ -77,6 +77,15 @@ public class ListenerServer {
 		
 		return ""+i;
 	}
+	
+	public ListenerClient GetClient(String id){
+		for(int i=0;i<clients.size();i++){
+			if (clients.get(i).getIdname().compareTo(id)==0){
+				return clients.get(i);	
+			}
+		}
+		return null; //not found
+	}
 
 
 }
