@@ -84,7 +84,7 @@ public abstract class  Actionnable extends Thread{
 			isolement="";
 			while( i!=pmes.length() &&pmes.charAt(i)!='_')i++;
 			isolement=pmes.substring(m1.end(),i);
-System.out.println("replace @G="+isolement+ "by "+ mregex.group(isolement.charAt(0)-48));
+//System.out.println("replace @G="+isolement+ "by "+ mregex.group(isolement.charAt(0)-48));
 			ntest=ntest.replaceAll("@G="+isolement+"_", mregex.group(isolement.charAt(0)-48));
 		}
 

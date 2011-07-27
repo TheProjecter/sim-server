@@ -54,8 +54,9 @@ public class ListenerClient implements Runnable{
 			ls.perform_protocol(this);
 			while(!fin&& (k=(char)is.read())>0 ){//bloquant
 
-				buffer=buffer+k; //attention au buffer trop gros..		
-				System.out.print(k);
+				buffer=buffer+k; //attention au buffer trop gros..	
+				if(k>33 && k<126)System.out.print(k); //verfier pourquoi ya des valeur bizarre qui transit lors de seconde connection
+				
 				for (int i=0;i<outs.size();i++){
 					System.out.print(k);
 					outs.get(i).write(k) ;

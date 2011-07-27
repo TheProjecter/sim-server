@@ -1,0 +1,48 @@
+
+<rules port="6667" mode="TCP">
+	<state id="0" >
+		<condition regex="" tostate="1">
+		<action name="SendMessage"  arg1=":irc_server NOTICE AUTH :*** Looking up your hostname...\n"></action>
+		<action name="SendMessage"  arg1=":irc_server NOTICE AUTH :*** Checking Ident\n"></action>
+		<action name="SendMessage"  arg1=":irc_server NOTICE AUTH :*** Found your hostname\n"></action>
+		</condition>
+	</state>
+
+	<state id="1">
+	 	<condition regex="NICK (.*)\n" >
+					<action name="SetIdname"  arg1="@G=1_"></action>
+		</condition>
+
+		<condition regex="USER (.*)\n" >
+			<action name="SendMessage"  arg1=":irc_server NOTICE AUTH :*** No Ident response\n"></action>
+			<action name="SendMessage"  arg1=":irc_server NOTICE AUTH :*** No Ident response\n"></action>
+			<action name="SendMessage"  arg1=":irc_server 001 @ID :welcome to irc server\n"></action>
+			<action name="SendMessage"  arg1=":irc_server 252 @ID 60 :IRC Operators online\n"></action>
+			<action name="SendMessage"  arg1=":@ID MODE @ID :+i\n"></action>
+		</condition>
+		<condition regex="QUIT:(.*)\n" >
+			<action name="CloseConnection"> </action>
+		</condition>
+		
+		
+		<condition regex="LIST(.*)\n" >
+			<action name="SendMessage"  arg1=":irc_server 321 @ID Channel :Users  Name\n"></action>
+			<action name="SendMessage"  arg1=":irc_server 322 secret_chan #channel1 test\n"></action>
+			<action name="SendMessage"  arg1=":irc_server 323 :End of /LIST\n"></action>
+		</condition>
+		
+		<condition regex="JOIN (.*)\n" >
+			<action name="SendMessage"  arg1=":@ID!~Guest@IP JOIN :@G=1_\n"></action>
+			<action name="SendMessage"  arg1=":irc_server 332 @ID @G=1_ :@G=1_ - topicgenial\n"></action>
+		</condition>
+		
+		
+	</state>
+	
+	
+	
+
+
+
+</rules>
+

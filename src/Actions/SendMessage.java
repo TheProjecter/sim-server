@@ -17,7 +17,9 @@ public class SendMessage extends Actionnable {
 	public void start(ListenerClient plc,Matcher m) {
 		String pmes;
 		try {
+			
 			pmes = ValParam( m, 0,plc,actions);
+			System.out.println("Sending: "+pmes);
 			plc.os.write( pmes.getBytes());
 		} catch (Exception e1) {
 			e1.printStackTrace();
