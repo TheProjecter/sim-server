@@ -1,6 +1,6 @@
 package Actions;
 
-import java.io.IOException;
+
 import java.util.regex.Matcher;
 
 import Engine.Actions;
@@ -14,13 +14,9 @@ public class CloseConnection extends Actionnable{
 	}
 	@Override
 	public void start(ListenerClient plc, Matcher m) {
-	
 
-		try {
-			plc.getSock().close();
-		} catch (IOException e) {
-			System.out.println("Socket closed or already closed");
-		}
+			plc.ConnectionClose();
+	
 	}
 	
 	

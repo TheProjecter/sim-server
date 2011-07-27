@@ -10,7 +10,7 @@ public class ListenerServer {
 
 
 	private boolean ecoute=true;
-	private LinkedList<ListenerClient> clients= new LinkedList<ListenerClient>();
+	public LinkedList<ListenerClient> clients= new LinkedList<ListenerClient>();
 	LinkedList<Condition> conditions;
 //(jung implementation?)
 
@@ -35,11 +35,14 @@ public class ListenerServer {
 				}
 				else
 				{
-					c.getSock().close();
+					
+					c.ConnectionClose();
+					System.out.println("socket close");
 				}
 			}
 		} catch (IOException e) {		
 			e.printStackTrace();
+		
 		}
 
 	}
@@ -53,11 +56,13 @@ public class ListenerServer {
 		
 	}
 	public void remove_clients(ListenerClient listenerClient) {
+		System.out.println("remove client");
 		this.clients.remove(listenerClient);
 	}
 
 	public boolean is_IDlibre(String id){
 		for (int i=0;i<clients.size();i++){
+		
 			if(clients.get(i).getIdname().equals(id))return false;
 		}
 		return true;
