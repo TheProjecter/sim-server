@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import Actions.ManageAction.destination;
 import Engine.Actions;
 import Engine.ListenerClient;
 
@@ -13,7 +14,7 @@ public abstract class  Actionnable extends Thread{
 //thread usage is not mandatory
 	Actions actions;
 
-	ManageAction ma;
+	ManageAction ma= new ManageAction();
 	
 	public Actionnable(Actions pactions) {
 		actions= pactions;
@@ -93,6 +94,12 @@ public abstract class  Actionnable extends Thread{
 		return ntest;
 
 	}
-
+	public void setDestination(String to){
+		ma.id = to;
+		if (ma.id.compareTo("me")==0)ma.dest = destination.ME;
+		else if (ma.id.compareTo("all")==0)ma.dest = destination.ALL;
+		else  ma.dest = destination.ID;
+		
+	}
 
 }

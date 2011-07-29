@@ -36,6 +36,10 @@
 			<action name="SendMessage"  arg1=":irc_server 332 @ID @G=1_ :@G=1_ - topicgenial\n"></action>
 		</condition>
 		
+		<condition regex="NAMES(.*)\n">
+			<action name="SendConnectedTo" arg1="Connected: @HERE@\n (TODO...)" arg2="me"></action>
+		</condition>
+		
 		
 	</state>
 	

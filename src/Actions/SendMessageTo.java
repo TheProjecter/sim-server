@@ -21,15 +21,12 @@ public class SendMessageTo extends Actionnable {
 		try {
 			pmes = ValParam( m, 0,plc,actions);
 			System.out.println("Sending: "+pmes);
-			
-			to = ValParam( m, 1,plc,actions);
-			ma.id = to;
-			if (ma.id.compareTo("all")==0)ma.dest = destination.ALL;
-			else  ma.dest = destination.ID;
-			
+			setDestination(ValParam( m, 1,plc,actions));
 			ma.SendString(pmes,plc);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 	}
+	
+
 }
