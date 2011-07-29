@@ -1,15 +1,15 @@
 package Engine;
 
-import java.io.IOException;
-import java.io.InputStream;
+
 import java.lang.reflect.Constructor;
 
-import java.util.Date;
+
 import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import Actions.*;
+
+import Model.Actionnable;
 
 public class Condition {
 	Pattern pattern;

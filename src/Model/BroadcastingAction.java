@@ -1,10 +1,10 @@
-package Actions;
+package Model;
 
 import java.io.IOException;
 
 import Engine.ListenerClient;
 
-public class ManageAction {
+public class BroadcastingAction {
 
 
 public  enum destination{ID, ME, ALL}

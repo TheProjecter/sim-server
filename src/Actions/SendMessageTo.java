@@ -2,9 +2,10 @@ package Actions;
 
 import java.util.regex.Matcher;
 
-import Actions.ManageAction.destination;
 import Engine.Actions;
 import Engine.ListenerClient;
+import Model.Actionnable;
+
 
 public class SendMessageTo extends Actionnable {
 
@@ -17,7 +18,6 @@ public class SendMessageTo extends Actionnable {
 	@Override
 	public void start(ListenerClient plc,Matcher m) {
 		String pmes;
-		String to;
 		try {
 			pmes = ValParam( m, 0,plc,actions);
 			System.out.println("Sending: "+pmes);

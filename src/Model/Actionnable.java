@@ -1,20 +1,21 @@
-package Actions;
+package Model;
+
 
 
 import java.util.Date;
-import java.util.LinkedList;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import Actions.ManageAction.destination;
 import Engine.Actions;
 import Engine.ListenerClient;
+import Model.BroadcastingAction.destination;
 
 public abstract class  Actionnable extends Thread{
 //thread usage is not mandatory
-	Actions actions;
+	protected Actions actions;
 
-	ManageAction ma= new ManageAction();
+	protected BroadcastingAction ma= new BroadcastingAction();
 	
 	public Actionnable(Actions pactions) {
 		actions= pactions;
@@ -36,11 +37,60 @@ public abstract class  Actionnable extends Thread{
 	public String ValParam(Matcher mregex,int numparam,ListenerClient plc,Actions actions) throws Exception{
 
 
-/*
- * 
- * order of these replacement is important
- * 
- */
+/* THIS CODE IS BETTER
+		String test= actions.getParam(numparam);
+		
+		
+		
+		String attributetype="";
+		String attributeParam="";
+		int state=1;
+
+		for(int i=0;i<test.length();i++){
+		
+			switch(state){
+			case 1:
+				if(test.charAt(i)=='@') state=2;
+				break;
+			case 2:
+				if(test.charAt(i)=='@'){ 
+					state=1;
+					break;
+				}
+				if(test.charAt(i)=='='){ 
+					state=3;
+					break;
+				}
+				attributetype+=test.charAt(i);
+
+				break;
+			case 3:
+
+				if(test.charAt(i)=='='){ 
+					System.out.println("attribute:"+attributetype+"  param:"+attributeParam);
+					
+					Constructor classToRun =   Class.forName("Attributes."+attributetype).getConstructor();
+					Attributable pr = (Attributable) classToRun.newInstance();
+					
+					test.replaceFirst("@"+attributetype+"="+attributeParam+"=", pr.Get(attributeParam,mregex,plc));
+					attributetype="";
+					attributeParam="";
+					state=1;
+					break;
+				}
+
+				attributeParam+=test.charAt(i);
+				break;
+			}
+		}
+		return test;
+		
+		*/
+		
+		
+		
+		
+		
 		
 		String pmes= actions.getParam(numparam);
 
@@ -92,8 +142,11 @@ public abstract class  Actionnable extends Thread{
 		ntest=	ntest.replaceAll( "/@%²","@");
 
 		return ntest;
+		
 
 	}
+	
+	
 	public void setDestination(String to){
 		ma.id = to;
 		if (ma.id.compareTo("me")==0)ma.dest = destination.ME;
