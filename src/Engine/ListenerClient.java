@@ -22,7 +22,7 @@ public class ListenerClient implements Runnable{
 	/**output flow*/
 	public OutputStream os;
 	public ListenerServer ls;
-	String buffer="";
+	private String buffer="";
 	private int etat=0;    //for protocol
 	private String idname=""; //could be a variable, it is an unique identifier of this client
 	public Map<String, String> variables = new HashMap<String,String>();//variable
@@ -47,7 +47,7 @@ public class ListenerClient implements Runnable{
 			ls.perform_protocol(this);
 			while(!fin&& (k=(char)is.read())>0 ){//blocked
 
-				buffer=buffer+k; //carreful with big buffer
+				setBuffer(getBuffer()+k); //carreful with big buffer
 				if(k>33 && k<126)System.out.print(k); 
 
 				if(k==65535)fin =true; // when a socket is closed on the client side
@@ -57,7 +57,7 @@ public class ListenerClient implements Runnable{
 					outs.get(i).write(k) ;
 				}
 				ls.perform_protocol(this);
-				if (k=='\n')buffer="";//discutable
+				if (k=='\n')setBuffer("");//discutable
 			}
 
 		} catch (IOException e) {
@@ -169,5 +169,13 @@ public class ListenerClient implements Runnable{
 
 	public void setVariables(Map<String, String> variables) {
 		this.variables = variables;
+	}
+
+	public void setBuffer(String buffer) {
+		this.buffer = buffer;
+	}
+
+	public String getBuffer() {
+		return buffer;
 	}
 }

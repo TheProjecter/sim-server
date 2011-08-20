@@ -18,7 +18,11 @@
 		<condition regex="test\n" >
 		<action name="PipeWith" arg1="127.0.0.1" arg2="30"></action>
 		</condition>
+		<condition function="name" arg1="@V=aa=" >
+		<action name="PipeWith" arg1="127.0.0.1" arg2="30"></action>
+		</condition>
 		
+			
 		
 	
 	</state>

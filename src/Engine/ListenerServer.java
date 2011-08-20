@@ -9,7 +9,7 @@ import java.util.LinkedList;
 public class ListenerServer {
 
 
-	private boolean ecoute=true;
+	private boolean listen=true;
 	public LinkedList<ListenerClient> clients= new LinkedList<ListenerClient>();
 	LinkedList<Condition> conditions;
 //(jung implementation?)
@@ -21,14 +21,14 @@ public class ListenerServer {
 		ServerSocket sp;
 		try {
 			sp = new ServerSocket(port);
-			while(this.ecoute){// serveur multi-utilisateur
+			while(this.listen){// serveur multi-user
 				System.out.println(clients.size());
-				System.out.println("écoute du port : "+sp.getLocalPort());
+				System.out.println("listen on port : "+sp.getLocalPort());
 				Socket sa;
 				sa = sp.accept();
 				System.out.println("connected : "+sa);
 				ListenerClient c = new ListenerClient(sa,this);
-				if(this.ecoute){
+				if(this.listen){
 					clients.add(c);
 					Thread t = new Thread(c);
 					t.start();
@@ -50,13 +50,11 @@ public class ListenerServer {
 
 	public void perform_protocol(ListenerClient listenerClient){
 		for (int i=0;i<conditions.size();i++){
-			
-			conditions.get(i).checkpattern(listenerClient);
+			conditions.get(i).testCondition(listenerClient);
 		}
 		
 	}
 	public void remove_clients(ListenerClient listenerClient) {
-		System.out.println("remove client");
 		this.clients.remove(listenerClient);
 	}
 
@@ -73,8 +71,6 @@ public class ListenerServer {
 		for (i=0;i<clients.size();i++){
 		if(is_IDlibre(""+i))break;
 		}
-		
-		
 		return ""+i;
 	}
 	
@@ -86,6 +82,4 @@ public class ListenerServer {
 		}
 		return null; //not found
 	}
-
-
 }

@@ -13,7 +13,7 @@ public class GenerateProtocol {
 	private LinkedList<Condition> condition= new LinkedList<Condition>();
 	private int port;
 	public GenerateProtocol() {
-		// TODO Auto-generated constructor stub
+	
 	}
 	public GenerateProtocol(String fic) {
 		   XMLReader saxReader;
@@ -26,7 +26,7 @@ public class GenerateProtocol {
 			        condition=sch.getCondition();
 			        port=sch.port;
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 	}

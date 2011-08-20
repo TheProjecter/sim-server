@@ -12,17 +12,20 @@ import java.util.regex.Pattern;
 import Model.Actionnable;
 
 public class Condition {
-	Pattern pattern;
-	int etat=0;
-	int futuretat=0;
-
-	LinkedList<Actions>  actions= new LinkedList<Actions>();
+	
+	int etat=0;		//context
+	private Pattern pattern; // a pattern must be in context => exception of model
+	private Matcher m;
+	String type = "regex";//context of this condition regex by default
+	
+	
+	private LinkedList<String> params = new LinkedList<String>(); //params of condition
+	LinkedList<Actions>  actions= new LinkedList<Actions>();//action to todo, if condition is true
+	int futuretat=0; //future state
+	
 	/*
-	 * CLOSE Connection (id or this(ok) or all)  plc.sock.close()            //close connection
-	 * SEND Message (id or this(ok) or all*)                                  //send message                    1 pipe to client?
-	 * SEND File (id or this* or all)										//pipe from file
-	 * GET Connected														 //send connected
-	 * SET Idname					ok								//SetIdname
+		TODO action
+
 	 * STORE FOLLOWING DATA UNTIL IN (file or var) regex de fin (on server)  //pipe to file et pipe to var?
 	 * EXEC File (with parameter) 								(on server)
 	 * PLAY Sound(ok)       juste wav 							(on server)
@@ -40,22 +43,27 @@ public class Condition {
 
 	public Condition(String strpattern,LinkedList<Actions> pactions,int petat,int pfuturetat) {
 		if(strpattern.equals("")){
-			pattern= Pattern.compile(".*");	
+			setPattern(Pattern.compile(".*"));	
 		}else{
-			pattern = Pattern.compile(strpattern);
+			setPattern(Pattern.compile(strpattern));
 		}
 		etat=petat;
 		futuretat=pfuturetat;
 		actions=pactions;
 	}
 
-	public void checkpattern(ListenerClient plc){
+	public void testCondition(ListenerClient plc){
 
 		if(plc.getEtat()==etat){
+			setM(getPattern().matcher(plc.getBuffer()));//conditionable			
+			//attributes depend of action which depend of condition// @G=1= could be misunderstood => context
+			if(type.compareTo("compareValue")==0){/// move in conditionable
+				
+				
+			}else if(type.compareTo("regex")==0){
 
-			Matcher m = pattern.matcher(plc.buffer);
 
-			if(m.matches() ){
+			if(getM().matches() ){
 				System.out.println("entered");
 				for (int i=0;i<actions.size();i++){
 					
@@ -66,7 +74,7 @@ public class Condition {
 					try {
 						Constructor classToRun =   Class.forName("Actions."+action).getConstructor(Actions.class);
 						Actionnable cl = (Actionnable) classToRun.newInstance(actionTodo);
-						cl.start(plc, m);
+						cl.start(plc, getM());
 		
 					} catch (Exception e) {
 						System.out.println(action+".class  inexistant : "+e);
@@ -84,12 +92,32 @@ public class Condition {
 					*/
 				}
 
-
+			}
 				plc.setEtat(futuretat);
-				plc.buffer="";
+				plc.setBuffer("");
 				plc.ls.perform_protocol(plc);
 			}
 		}
+	}
+
+
+	public void setPattern(Pattern pattern) {
+		this.pattern = pattern;
+	}
+
+
+	public Pattern getPattern() {
+		return pattern;
+	}
+
+
+	public void setM(Matcher m) {
+		this.m = m;
+	}
+
+
+	public Matcher getM() {
+		return m;
 	}
 
 
