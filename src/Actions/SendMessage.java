@@ -1,8 +1,8 @@
 package Actions;
 
-import java.util.regex.Matcher;
 
-import Engine.Actions;
+
+import Engine.Condition;
 import Engine.ListenerClient;
 import Model.Actionnable;
 
@@ -10,16 +10,19 @@ public class SendMessage extends Actionnable {
 
 
 
-	public SendMessage(Actions pactions) {
-		super(pactions);
-
+	public SendMessage(Condition pcondition, int pNumaction) {
+		super(pcondition, pNumaction);
+		// TODO Auto-generated constructor stub
 	}
+
 	@Override
-	public void start(ListenerClient plc,Matcher m) {
+	public void start(ListenerClient plc) {
 		String pmes;
 		try {
-			pmes = ValParam( m, 0,plc,actions);
+			
+			pmes = ValParam(getParamAction(0), plc);
 			System.out.println("Sending: "+pmes);
+			
 			System.out.println("Sending: "+plc.getIdname());
 			ma.SendString(pmes,plc);
 		} catch (Exception e1) {

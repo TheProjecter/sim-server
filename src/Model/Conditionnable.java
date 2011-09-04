@@ -5,8 +5,9 @@ import Engine.ListenerClient;
 
 public abstract class  Conditionnable {
 
-	public Conditionnable() {
-		
+	String type;
+	public Conditionnable(String name) {
+	type=name;// chack if it's correct for action..	
 	}
 
 	public boolean Test(Condition c,ListenerClient plc){

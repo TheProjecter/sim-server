@@ -2,96 +2,126 @@ package Model;
 
 
 
+import java.lang.reflect.Constructor;
 import java.util.Date;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import Engine.Actions;
+import Engine.Condition;
 import Engine.ListenerClient;
 import Model.BroadcastingAction.destination;
 
 public abstract class  Actionnable extends Thread{
-//thread usage is not mandatory
-	protected Actions actions;
+	//thread usage is not mandatory
 
+	protected Condition condition;
+	protected int numAction=0;
 	protected BroadcastingAction ma= new BroadcastingAction();
-	
-	public Actionnable(Actions pactions) {
-		actions= pactions;
+
+	public Actionnable(Condition pcondition,int pNumaction) {
+		condition= pcondition;
+		numAction = pNumaction;
+
 	}
+	public String getParamAction(int i){
+		try {
+			return condition.getActions().get(this.numAction).getParam(i);
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+		return "";
+
+	}
+
+
 
 	public int numparam(){
 
-		return actions.getParams().size();
+		return getActions().getParams().size();
 	}
 
-	public void start(ListenerClient plc,Matcher m){
+	public void start(ListenerClient plc){
 
 		System.out.println("not implemented function ");
 	}
 
+	//generic parameter call in Attributes Directory
+	//TODO test it , and implement it, use the deprecated method 
+	public String ValParam(String paramToParse, ListenerClient plc ){
+		//String paramToParse= actions.getParam(numparam);
+		//condition contain context, plc for evaluate  native argument, paramToParse is the input
 
-	
 
-	public String ValParam(Matcher mregex,int numparam,ListenerClient plc,Actions actions) throws Exception{
-
-
-/* THIS CODE IS BETTER
-		String test= actions.getParam(numparam);
-		
-		
-		
+		String test= paramToParse; //actions.getParam(numparam);
 		String attributetype="";
 		String attributeParam="";
 		int state=1;
 
 		for(int i=0;i<test.length();i++){
+			try {
 		
-			switch(state){
-			case 1:
-				if(test.charAt(i)=='@') state=2;
-				break;
-			case 2:
+			if(state==1){
+					
+				if(test.charAt(i)=='@'){
+					attributetype="";
+					state=2;
+				}
+				
+			}else if(state==2){
+				
 				if(test.charAt(i)=='@'){ 
 					state=1;
-					break;
-				}
-				if(test.charAt(i)=='='){ 
+					
+				}else if(test.charAt(i)=='='){ 
 					state=3;
-					break;
+					attributeParam="";	
+					
+				}else{
+					attributetype+=test.charAt(i);
 				}
-				attributetype+=test.charAt(i);
-
-				break;
-			case 3:
+			}else{
 
 				if(test.charAt(i)=='='){ 
 					System.out.println("attribute:"+attributetype+"  param:"+attributeParam);
-					
-					Constructor classToRun =   Class.forName("Attributes."+attributetype).getConstructor();
-					Attributable pr = (Attributable) classToRun.newInstance();
-					
-					test.replaceFirst("@"+attributetype+"="+attributeParam+"=", pr.Get(attributeParam,mregex,plc));
-					attributetype="";
-					attributeParam="";
-					state=1;
-					break;
-				}
 
-				attributeParam+=test.charAt(i);
-				break;
+					Constructor<Attributable> classToRun;
+					
+						classToRun = (Constructor<Attributable>) Class.forName("Attributes."+attributetype).getConstructor();
+						Attributable pr = (Attributable) classToRun.newInstance();
+						System.out.println("before:"+test);
+						test=test.replaceFirst("@"+attributetype+"="+attributeParam+"=", pr.Get(attributeParam,condition,plc));
+							
+						System.out.println("after:"+test);
+						i=0;  //optimizable TODO
+
+						attributetype="";
+						attributeParam="";						
+						state=1;	
+				}else{
+
+					attributeParam+=test.charAt(i);
+				}
 			}
+
+			} catch (Exception e) {
+
+				e.printStackTrace();
+				break;
+				//return "problem on class or XML format";
+			}
+			
 		}
+
+
 		return test;
-		
-		*/
-		
-		
-		
-		
-		
-		
+	}
+	/*
+	@Deprecated
+	public String ValParam(Matcher mregex,int numparam,ListenerClient plc,Actions actions) throws Exception{
+
 		String pmes= actions.getParam(numparam);
 
 		pmes=	pmes.replaceAll("@@", "/@%²");
@@ -117,13 +147,13 @@ public abstract class  Actionnable extends Thread{
 		while(m1.find()) {
 			i=m1.end();
 			isolement="";
-			while( i!=pmes.length() &&pmes.charAt(i)!='_')i++;
+			while( i!=pmes.length() &&pmes.charAt(i)!='=')i++;
 
 			isolement=pmes.substring(m1.end(),i);
 
 			var=plc.getVariables().get(isolement);	
 			if (var==null)var=""; 
-			ntest=ntest.replaceAll("@V="+isolement+"_",var);
+			ntest=ntest.replaceAll("@V="+isolement+"=",var);
 
 
 		}
@@ -133,26 +163,32 @@ public abstract class  Actionnable extends Thread{
 		while(m1.find()) {
 			i=m1.end();
 			isolement="";
-			while( i!=pmes.length() &&pmes.charAt(i)!='_')i++;
+			while( i!=pmes.length() &&pmes.charAt(i)!='=')i++;
 			isolement=pmes.substring(m1.end(),i);
 //System.out.println("replace @G="+isolement+ "by "+ mregex.group(isolement.charAt(0)-48));
-			ntest=ntest.replaceAll("@G="+isolement+"_", mregex.group(isolement.charAt(0)-48));
+			ntest=ntest.replaceAll("@G="+isolement+"=", mregex.group(isolement.charAt(0)-48));
 		}
 
 		ntest=	ntest.replaceAll( "/@%²","@");
 
 		return ntest;
-		
+
 
 	}
-	
-	
+	 */
+
 	public void setDestination(String to){
 		ma.id = to;
 		if (ma.id.compareTo("me")==0)ma.dest = destination.ME;
 		else if (ma.id.compareTo("all")==0)ma.dest = destination.ALL;
 		else  ma.dest = destination.ID;
-		
+
+	}
+
+
+
+	protected Actions getActions() {
+		return this.condition.getActions().get(numAction);
 	}
 
 }

@@ -5,27 +5,27 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-import java.util.regex.Matcher;
 
-import Engine.Actions;
+import Engine.Condition;
 import Engine.ListenerClient;
 import Model.Actionnable;
 
 
 public class PipeWithServer extends Actionnable{
 
-	public PipeWithServer(Actions pactions) {
-		super(pactions);
 
+	public PipeWithServer(Condition pcondition, int pNumaction) {
+		super(pcondition, pNumaction);
+		// TODO Auto-generated constructor stub
 	}
 
-	public void start(final ListenerClient plc,Matcher m){
+	public void start(final ListenerClient plc){
 
 
 
 		try {
-			String url = ValParam( m, 0,plc,actions);
-			int port = Integer.parseInt(ValParam( m, 1,plc,actions));
+			String url = ValParam( getParamAction(0), plc);
+			int port = Integer.parseInt(ValParam(getParamAction(0), plc));
 			Socket so = new Socket(url,port);
 			final InputStream inServ = so.getInputStream();
 

@@ -1,11 +1,11 @@
 package Model;
 
-import java.util.regex.Matcher;
 
+import Engine.Condition;
 import Engine.ListenerClient;
 
 public abstract class Attributable {
-	/**NOT IMPLEMENTED*/
+	
 	
 	String attribute;
 	
@@ -15,8 +15,8 @@ public abstract class Attributable {
 
 	}
 	
-	public String Get(String param,Matcher m,ListenerClient plc){
+	public String Get(String param,Condition c,ListenerClient plc){
 		
-		return "";
+		return "not implemented attributes";
 	}
 }

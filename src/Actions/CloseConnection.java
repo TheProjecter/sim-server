@@ -1,20 +1,20 @@
 package Actions;
 
 
-import java.util.regex.Matcher;
-
-import Engine.Actions;
+import Engine.Condition;
 import Engine.ListenerClient;
 import Model.Actionnable;
 
 public class CloseConnection extends Actionnable{
 
-	public CloseConnection(Actions pactions) {
-		super(pactions);
-
+	
+	public CloseConnection(Condition pcondition, int pNumaction) {
+		super(pcondition, pNumaction);
+	
 	}
+
 	@Override
-	public void start(ListenerClient plc, Matcher m) {
+	public void start(ListenerClient plc) {
 
 			plc.ConnectionClose();
 	

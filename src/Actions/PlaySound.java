@@ -2,7 +2,7 @@ package Actions;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.regex.Matcher;
+
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -13,13 +13,21 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import Engine.Actions;
+
+import Engine.Condition;
 import Engine.ListenerClient;
 import Model.Actionnable;
  
 public class PlaySound extends Actionnable {
  
-    private String filename;
+    public PlaySound(Condition pcondition, int pNumaction) {
+		super(pcondition, pNumaction);
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+	private String filename;
  
     private Position curPosition;
  
@@ -29,18 +37,15 @@ public class PlaySound extends Actionnable {
         LEFT, RIGHT, NORMAL
     };
  
-    public PlaySound(Actions pactions) {
-		super(pactions);
-		
-    }
+   
     
     @Override
-    public void start(ListenerClient plc, Matcher m) {
+    public void start(ListenerClient plc) {
  
     	
     	String wavfile;
 		try {
-			wavfile = ValParam( m, 0,plc,actions);
+			wavfile = ValParam(getParamAction(0), plc);
 			  filename = wavfile;
 	    	  curPosition = Position.NORMAL;
 	    	  this.start();

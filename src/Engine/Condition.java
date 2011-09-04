@@ -19,8 +19,8 @@ public class Condition {
 	String type = "regex";//context of this condition regex by default
 	
 	
-	private LinkedList<String> params = new LinkedList<String>(); //params of condition
-	LinkedList<Actions>  actions= new LinkedList<Actions>();//action to todo, if condition is true
+//	private LinkedList<String> params = new LinkedList<String>(); //params of condition
+	private LinkedList<Actions>  actions= new LinkedList<Actions>();//action to todo, if condition is true
 	int futuretat=0; //future state
 	
 	/*
@@ -49,32 +49,35 @@ public class Condition {
 		}
 		etat=petat;
 		futuretat=pfuturetat;
-		actions=pactions;
+		setActions(pactions);
 	}
 
 	public void testCondition(ListenerClient plc){
 
 		if(plc.getEtat()==etat){
-			setM(getPattern().matcher(plc.getBuffer()));//conditionable			
+			//conditionable type ==type action?
+			//System.out.println("etat="+etat);
+			setM(getPattern().matcher(plc.getBuffer()));//conditionable	
+			//System.out.println("buffer:"+plc.getBuffer());
 			//attributes depend of action which depend of condition// @G=1= could be misunderstood => context
 			if(type.compareTo("compareValue")==0){/// move in conditionable
 				
 				
 			}else if(type.compareTo("regex")==0){
-
+			//	System.out.println("regex condition"+getM());
 
 			if(getM().matches() ){
 				System.out.println("entered");
-				for (int i=0;i<actions.size();i++){
+				for (int i=0;i<getActions().size();i++){
 					
-					Actions actionTodo =actions.get(i);
+					Actions actionTodo =getActions().get(i);
 					String action = actionTodo.type.toString();
 					System.out.println("action= " +action);
 					
 					try {
-						Constructor classToRun =   Class.forName("Actions."+action).getConstructor(Actions.class);
-						Actionnable cl = (Actionnable) classToRun.newInstance(actionTodo);
-						cl.start(plc, getM());
+						Constructor classToRun =   Class.forName("Actions."+action).getConstructor(Condition.class,int.class);
+						Actionnable cl = (Actionnable) classToRun.newInstance(this,i);
+						cl.start(plc);
 		
 					} catch (Exception e) {
 						System.out.println(action+".class  inexistant : "+e);
@@ -91,12 +94,15 @@ public class Condition {
 					}
 					*/
 				}
-
-			}
-				plc.setEtat(futuretat);
 				plc.setBuffer("");
-				plc.ls.perform_protocol(plc);
 			}
+			
+			
+			}
+			if(plc.getEtat()!=futuretat) {
+				plc.setEtat(futuretat);
+			}
+			
 		}
 	}
 
@@ -118,6 +124,16 @@ public class Condition {
 
 	public Matcher getM() {
 		return m;
+	}
+
+
+	public void setActions(LinkedList<Actions> actions) {
+		this.actions = actions;
+	}
+
+
+	public LinkedList<Actions> getActions() {
+		return actions;
 	}
 
 

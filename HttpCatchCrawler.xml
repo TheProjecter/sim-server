@@ -3,8 +3,8 @@
 	<state id="0" >
 		<condition regex="GET /(.*) HTTP(.*)" tostate="1" >
 			<action name="PlaySound" arg1="test.wav"></action>
-			<action name="SetVar" arg1="page" arg2="@G=1_"/>
-			<action name="StoreToFile" arg1="log.txt" arg2="@G=1_\r\n"/>
+			<action name="SetVar" arg1="page" arg2="@G=1="/>
+			<action name="StoreToFile" arg1="log.txt" arg2="@G=1=\r\n"/>
 			</condition>		
 	</state>
 	<state id="1" >
@@ -12,7 +12,7 @@
 				<action name="SendMessage" arg1="HTTP/1.0 200 OK\n"></action>
 				<action name="SendMessage" arg1="Content-Type : text/HTML\n"></action>
 				<action name="SendMessage" arg1="\n\n"></action>
-				<action name="SendFile" arg1="@V=page_"></action>
+				<action name="SendFile" arg1="@V=page="></action>
 				<action name="SendMessage" arg1="\n\n"></action>
 				<action name="CloseConnection"></action>
 		</condition>		

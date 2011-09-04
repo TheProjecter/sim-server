@@ -1,26 +1,27 @@
 package Actions;
 
-import java.util.regex.Matcher;
 
-import Engine.Actions;
+import Engine.Condition;
 import Engine.ListenerClient;
 import Model.Actionnable;
 
 public class SendConnectedTo extends Actionnable{
 
-	public SendConnectedTo(Actions pactions) {
-		super(pactions);
+	
 
+
+	public SendConnectedTo(Condition pcondition, int pNumaction) {
+		super(pcondition, pNumaction);
+		// TODO Auto-generated constructor stub
 	}
 
-
-	public void start(ListenerClient plc, Matcher m) {
+	public void start(ListenerClient plc) {
 
 
 		String messageWrapper;
 		try {
-			messageWrapper = ValParam( m, 0,plc,actions);
-			setDestination(ValParam( m, 1,plc,actions));
+			messageWrapper = ValParam(getParamAction(0), plc);
+			setDestination(ValParam(getParamAction(0), plc));
 			
 			for(int i=0;i<plc.ls.clients.size();i++){
 				

@@ -11,7 +11,7 @@
 	<state id="1">
 	
 		<condition regex="EHLO (.*)\n" tostate="2" >
-			<action name="SendMessage" arg1="250 @G=1_\n"></action>
+			<action name="SendMessage" arg1="250 @G=1=\n"></action>
    		</condition>
    		
 		
