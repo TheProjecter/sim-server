@@ -6,67 +6,48 @@ import java.lang.reflect.Constructor;
 
 import java.util.LinkedList;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 
 import Model.Actionnable;
+import Model.Attributable;
+import Model.Conditionnable;
 
 public class Condition {
 	
-	int etat=0;		//context
-	private Pattern pattern; // a pattern must be in context => exception of model
-	private Matcher m;
-	String type = "regex";//context of this condition regex by default
-	
-	
-//	private LinkedList<String> params = new LinkedList<String>(); //params of condition
+	String etat="0";		//context
+
+	private Matcher m;//context of condition, can be use for actions...
+
+	Conditionnable testClass;
+
 	private LinkedList<Actions>  actions= new LinkedList<Actions>();//action to todo, if condition is true
-	int futuretat=0; //future state
+	String futuretat="0"; //future state
 	
-	/*
-		TODO action
-
-	 * STORE FOLLOWING DATA UNTIL IN (file or var) regex de fin (on server)  //pipe to file et pipe to var?
-	 * EXEC File (with parameter) 								(on server)
-	 * PLAY Sound(ok)       juste wav 							(on server)
-	 * TUNNELING on port    ok    								(on server)  //Pipe with server
-
-	 */
-	//retirons les classes Action dont il n'y a pas de Thread
-
-
-
-	public Condition(String strpattern,LinkedList<Actions> actions,int petat) {
-		this(strpattern,actions,petat,petat);
+	public Condition(String strpattern,LinkedList<String> paramsCondition,LinkedList<Actions> actions,String petat) {
+		this(strpattern,paramsCondition,actions,petat,petat);
 	}
 
 
-	public Condition(String strpattern,LinkedList<Actions> pactions,int petat,int pfuturetat) {
-		if(strpattern.equals("")){
-			setPattern(Pattern.compile(".*"));	
-		}else{
-			setPattern(Pattern.compile(strpattern));
-		}
+	public Condition(String function,LinkedList<String> PparamsCondition, LinkedList<Actions> pactions,String petat,String pfuturetat) {
+		
+		
 		etat=petat;
 		futuretat=pfuturetat;
-		setActions(pactions);
+		try {
+			Constructor classForTest =   Class.forName("Conditions."+function).getConstructor(LinkedList.class);
+			testClass = (Conditionnable) classForTest.newInstance(PparamsCondition);
+			setActions(pactions);
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
 	}
 
 	public void testCondition(ListenerClient plc){
-
-		if(plc.getEtat()==etat){
+		if(plc.getEtat().compareTo(etat)==0){
 			//conditionable type ==type action?
-			//System.out.println("etat="+etat);
-			setM(getPattern().matcher(plc.getBuffer()));//conditionable	
-			//System.out.println("buffer:"+plc.getBuffer());
-			//attributes depend of action which depend of condition// @G=1= could be misunderstood => context
-			if(type.compareTo("compareValue")==0){/// move in conditionable
-				
-				
-			}else if(type.compareTo("regex")==0){
-			//	System.out.println("regex condition"+getM());
-
-			if(getM().matches() ){
+			//attributes depend of action which depend of condition// @G=1= could be misunderstood => context			
+			if(testClass.Test(this, plc)){
 				System.out.println("entered");
 				for (int i=0;i<getActions().size();i++){
 					
@@ -93,29 +74,90 @@ public class Condition {
 	
 					}
 					*/
+					if(plc.getEtat().compareTo(futuretat)!=0) {
+						plc.setEtat(futuretat);
+					}
 				}
 				plc.setBuffer("");
 			}
 			
 			
 			}
-			if(plc.getEtat()!=futuretat) {
-				plc.setEtat(futuretat);
+			
+			
+		
+	}
+
+
+	public String ValParam(String paramToParse, ListenerClient plc ){
+		//String paramToParse= actions.getParam(numparam);
+		//condition contain context, plc for evaluate  native argument, paramToParse is the input
+
+
+		String test= paramToParse; //actions.getParam(numparam);
+		test=   test.replaceAll("\\\\n", ""+'\n');//   \\n -> \n 
+		String attributetype="";
+		String attributeParam="";
+		int state=1;
+
+		for(int i=0;i<test.length();i++){
+			try {
+		
+			if(state==1){
+					
+				if(test.charAt(i)=='@'){
+					attributetype="";
+					state=2;
+				}
+				
+			}else if(state==2){
+				
+				if(test.charAt(i)=='@'){ 
+					state=1;
+					
+				}else if(test.charAt(i)=='='){ 
+					state=3;
+					attributeParam="";	
+					
+				}else{
+					attributetype+=test.charAt(i);
+				}
+			}else{
+
+				if(test.charAt(i)=='='){ 
+					System.out.println("attribute:"+attributetype+"  param:"+attributeParam);
+
+					Constructor<Attributable> classToRun;
+					
+						classToRun = (Constructor<Attributable>) Class.forName("Attributes."+attributetype).getConstructor();
+						Attributable pr = (Attributable) classToRun.newInstance();
+						System.out.println("before:"+test);
+						test=test.replaceFirst("@"+attributetype+"="+attributeParam+"=", pr.Get(attributeParam,this,plc));
+							
+						System.out.println("after:"+test);
+						i=0;  //optimizable TODO
+
+						attributetype="";
+						attributeParam="";						
+						state=1;	
+				}else{
+
+					attributeParam+=test.charAt(i);
+				}
+			}
+
+			} catch (Exception e) {
+
+				e.printStackTrace();
+				break;
+				//return "problem on class or XML format";
 			}
 			
 		}
+
+
+		return test;
 	}
-
-
-	public void setPattern(Pattern pattern) {
-		this.pattern = pattern;
-	}
-
-
-	public Pattern getPattern() {
-		return pattern;
-	}
-
 
 	public void setM(Matcher m) {
 		this.m = m;
@@ -131,13 +173,8 @@ public class Condition {
 		this.actions = actions;
 	}
 
-
 	public LinkedList<Actions> getActions() {
 		return actions;
 	}
-
-
-
-
 	
 }

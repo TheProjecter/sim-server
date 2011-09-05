@@ -23,7 +23,7 @@ public class ListenerClient implements Runnable{
 	public OutputStream os;
 	public ListenerServer ls;
 	private String buffer="";
-	private int etat=0;    //for protocol
+	private String etat="0";    //for protocol
 	private String idname=""; //could be a variable, it is an unique identifier of this client
 	public Map<String, String> variables = new HashMap<String,String>();//variable
 
@@ -153,12 +153,12 @@ public class ListenerClient implements Runnable{
 
 
 
-	public int getEtat() {
+	public String getEtat() {
 		return etat;
 	}
 
 
-	public void setEtat(int etat) {
+	public void setEtat(String etat) {
 		this.etat = etat;
 	}
 

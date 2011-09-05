@@ -25,7 +25,7 @@ public LinkedList<String> getParams() {
 }
 
 public void addParams(String param) {
-	System.out.println("param:" +param);
+	//System.out.println("param:" +param);
 	params.add(param);
 }
 

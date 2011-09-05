@@ -7,9 +7,10 @@ import org.xml.sax.helpers.LocatorImpl;
 
 public class SimpleContentHandler implements ContentHandler {
 	int port=25;
-	String regex="";
-	int tostate=0;
-	int currentstate=0;
+	String functionCondition="";
+	private LinkedList<String> paramsCondition= new LinkedList<String>();
+	String tostate="0";
+	String currentstate="0";
 	private LinkedList<Condition> condition= new LinkedList<Condition>();
 	private LinkedList<Actions> ActionsToadd;
 
@@ -95,9 +96,16 @@ public class SimpleContentHandler implements ContentHandler {
 
 		if (localName.equals("condition")){
 			ActionsToadd = new LinkedList<Actions>();	
-			regex = attributs.getValue("regex");
+			functionCondition = attributs.getValue("function");
+			paramsCondition= new LinkedList<String>();
+			for (int index = 1; index < attributs.getLength(); index++) {
+				System.out.println("Condition>>>"+attributs.getValue("arg"+index));
+				paramsCondition.add(attributs.getValue("arg"+index)); //on recupere les arguments
+			}
+			//TODO
 			try {
-				tostate= Integer.parseInt(attributs.getValue("tostate"));
+				tostate= attributs.getValue("tostate");
+				if(tostate==null)tostate=currentstate;
 			} catch (Exception e) {
 				tostate=currentstate;
 			}
@@ -117,7 +125,7 @@ public class SimpleContentHandler implements ContentHandler {
 			ActionsToadd.add(act);
 		}
 		if (localName.equals("state")){	
-			currentstate=Integer.parseInt(attributs.getValue("id"));
+			currentstate=attributs.getValue("id");
 		}
 
 
@@ -146,14 +154,14 @@ public class SimpleContentHandler implements ContentHandler {
 
 		if (localName.equals("condition")){
 			System.out.println("------------------condition added:");
-			for (int i=0;i<ActionsToadd.size();i++)
-			{
+			//for (int i=0;i<ActionsToadd.size();i++)
+			//{
 				//System.out.println("cond name:"+ActionsToadd.get(i).);
-				for (int k=0;k<ActionsToadd.get(i).getParams().size();k++)
-				  System.out.println(ActionsToadd.get(i).getParams().get(k));
-			}
+				//for (int k=0;k<ActionsToadd.get(i).getParams().size();k++)
+				//  System.out.println(ActionsToadd.get(i).getParams().get(k));
+		//	}
 			
-			condition.add(new Condition(regex,ActionsToadd, currentstate,tostate));
+			condition.add(new Condition(functionCondition,paramsCondition,ActionsToadd, currentstate,tostate));
 		}
 
 

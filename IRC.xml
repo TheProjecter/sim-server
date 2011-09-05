@@ -1,7 +1,7 @@
 
 <rules port="6667" mode="TCP">
 	<state id="0" >
-		<condition regex="" tostate="1">
+		<condition function="regex" arg1="" tostate="1">
 		<action name="SendMessage"  arg1=":irc_server NOTICE AUTH :*** Looking up your hostname...\n"></action>
 		<action name="SendMessage"  arg1=":irc_server NOTICE AUTH :*** Checking Ident\n"></action>
 		<action name="SendMessage"  arg1=":irc_server NOTICE AUTH :*** Found your hostname\n"></action>
@@ -9,41 +9,55 @@
 	</state>
 
 	<state id="1">
-	 	<condition regex="NICK (.*)\n" >
+	 	<condition function="regex" arg1="NICK (.*)\n" >
 					<action name="SetIdname"  arg1="@G=1="></action>
+					<action name="SetVar" arg1="user" arg2="@G=1="></action>
+		</condition>
+		<condition function="regex" arg1="show\n" tostate="3">
+				<action name="SendMessage"  arg1="voila : @V=user="></action>
 		</condition>
 
-		<condition regex="USER (.*)\n" >
+		<condition function="regex" arg1="USER (.*)\n" >
 			<action name="SendMessage"  arg1=":irc_server NOTICE AUTH :*** No Ident response\n"></action>
 			<action name="SendMessage"  arg1=":irc_server NOTICE AUTH :*** No Ident response\n"></action>
 			<action name="SendMessage"  arg1=":irc_server 001 @ID== :welcome to irc server\n"></action>
 			<action name="SendMessage"  arg1=":irc_server 252 @ID== 60 :IRC Operators online\n"></action>
 			<action name="SendMessage"  arg1=":@ID== MODE @ID== :+i\n"></action>
 		</condition>
-		<condition regex="QUIT:(.*)\n" >
+		<condition function="regex" arg1="QUIT:(.*)\n" >
 			<action name="CloseConnection"> </action>
 		</condition>
 		
 		
-		<condition regex="LIST(.*)\n" >
+		<condition function="regex" arg1="LIST(.*)\n" >
 			<action name="SendMessage"  arg1=":irc_server 321 @ID== Channel :Users  Name\n"></action>
 			<action name="SendMessage"  arg1=":irc_server 322 secret_chan #channel1 test\n"></action>
 			<action name="SendMessage"  arg1=":irc_server 323 :End of /LIST\n"></action>
 		</condition>
 		
-		<condition regex="JOIN (.*)\n" >
+		<condition function="regex" arg1="JOIN (.*)\n" >
 			<action name="SendMessage"  arg1=":@ID==!~Guest@IP== JOIN :@G=1=\n"></action>
 			<action name="SendMessage"  arg1=":irc_server 332 @ID== @G=1= :@G=1= - topicgenial\n"></action>
 		</condition>
 		
-		<condition regex="NAMES(.*)\n">
+		<condition function="regex" arg1="NAMES(.*)\n">
 			<action name="SendConnectedTo" arg1="Connected: @HERE@\n (TODO...)" arg2="me"></action>
 		</condition>
 		
 		
 	</state>
 	
+	<state id="3">
+		<condition function="compareValue" arg1="@V=user=" arg2="==" arg3="john" tostate="1">
+			<action name="SendMessage" arg1="your are john, welcome"></action>
+		</condition>
+		
+		<condition function="compareValue" arg1="@V=user=" arg2="!=" arg3="john" tostate="1">
+			<action name="SendMessage" arg1="your are NOT john, bye"></action>
+		</condition>
+		
 	
+	</state>
 	
 
 
