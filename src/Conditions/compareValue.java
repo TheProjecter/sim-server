@@ -31,7 +31,7 @@ public class compareValue extends Conditionnable{
 		
 
 		}catch (Exception e) {
-			System.out.println("int cast error for compareValue");
+		//	System.out.println("int cast error for compareValue");
 		}
 		
 		//string evaluation:

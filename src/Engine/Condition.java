@@ -7,31 +7,35 @@ import java.lang.reflect.Constructor;
 import java.util.LinkedList;
 import java.util.regex.Matcher;
 
+import javax.swing.event.EventListenerList;
+
+import Event.ServerListener;
+
 import Model.Actionnable;
 import Model.Attributable;
 import Model.Conditionnable;
 
 public class Condition {
 	
-	String etat="0";		//context
+	String state="0";		//context
 
 	private Matcher m;//context of condition, can be use for actions...
 
 	Conditionnable testClass;
 
 	private LinkedList<Actions>  actions= new LinkedList<Actions>();//action to todo, if condition is true
-	String futuretat="0"; //future state
+	String futureState="0"; //future state
 	
 	public Condition(String strpattern,LinkedList<String> paramsCondition,LinkedList<Actions> actions,String petat) {
 		this(strpattern,paramsCondition,actions,petat,petat);
 	}
-
+	
 
 	public Condition(String function,LinkedList<String> PparamsCondition, LinkedList<Actions> pactions,String petat,String pfuturetat) {
 		
 		
-		etat=petat;
-		futuretat=pfuturetat;
+		state=petat;
+		futureState=pfuturetat;
 		try {
 			Constructor classForTest =   Class.forName("Conditions."+function).getConstructor(LinkedList.class);
 			testClass = (Conditionnable) classForTest.newInstance(PparamsCondition);
@@ -44,7 +48,7 @@ public class Condition {
 	}
 
 	public void testCondition(ListenerClient plc){
-		if(plc.getEtat().compareTo(etat)==0){
+		if(plc.getEtat().compareTo(state)==0){
 			//conditionable type ==type action?
 			//attributes depend of action which depend of condition// @G=1= could be misunderstood => context			
 			if(testClass.Test(this, plc)){
@@ -54,7 +58,7 @@ public class Condition {
 					Actions actionTodo =getActions().get(i);
 					String action = actionTodo.type.toString();
 					System.out.println("action= " +action);
-					
+					plc.ls.fireActionPerformed(plc.getIdname(), action);
 					try {
 						Constructor classToRun =   Class.forName("Actions."+action).getConstructor(Condition.class,int.class);
 						Actionnable cl = (Actionnable) classToRun.newInstance(this,i);
@@ -74,8 +78,10 @@ public class Condition {
 	
 					}
 					*/
-					if(plc.getEtat().compareTo(futuretat)!=0) {
-						plc.setEtat(futuretat);
+					if(plc.getEtat().compareTo(futureState)!=0) {
+						plc.setEtat(futureState);
+						//System.out.println("fire!"getListenerCount());
+						plc.ls.fireStateChanged(plc.getIdname(),futureState);
 					}
 				}
 				plc.setBuffer("");
@@ -125,16 +131,19 @@ public class Condition {
 			}else{
 
 				if(test.charAt(i)=='='){ 
-					System.out.println("attribute:"+attributetype+"  param:"+attributeParam);
+			//		System.out.println("attribute:"+attributetype+"  param:"+attributeParam);
 
 					Constructor<Attributable> classToRun;
 					
 						classToRun = (Constructor<Attributable>) Class.forName("Attributes."+attributetype).getConstructor();
 						Attributable pr = (Attributable) classToRun.newInstance();
-						System.out.println("before:"+test);
+					//	System.out.println("before:"+test);
+						try{
 						test=test.replaceFirst("@"+attributetype+"="+attributeParam+"=", pr.Get(attributeParam,this,plc));
-							
-						System.out.println("after:"+test);
+						}catch (Exception e) {
+							test=test.replaceFirst("@"+attributetype+"="+attributeParam+"=", "N/A");
+						}
+						//System.out.println("after:"+test);
 						i=0;  //optimizable TODO
 
 						attributetype="";
@@ -147,8 +156,8 @@ public class Condition {
 			}
 
 			} catch (Exception e) {
-
-				e.printStackTrace();
+				
+		//		e.printStackTrace();
 				break;
 				//return "problem on class or XML format";
 			}
@@ -176,5 +185,7 @@ public class Condition {
 	public LinkedList<Actions> getActions() {
 		return actions;
 	}
+	
+	
 	
 }

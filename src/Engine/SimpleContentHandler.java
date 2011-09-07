@@ -7,6 +7,9 @@ import org.xml.sax.helpers.LocatorImpl;
 
 public class SimpleContentHandler implements ContentHandler {
 	int port=25;
+	String GUIname="";
+	public enum TYPE  {CLIENT, SERVER};
+	  TYPE type = TYPE.SERVER;
 	String functionCondition="";
 	private LinkedList<String> paramsCondition= new LinkedList<String>();
 	String tostate="0";
@@ -85,13 +88,22 @@ public class SimpleContentHandler implements ContentHandler {
 	 * @see org.xml.sax.ContentHandler#startElement(java.lang.String, java.lang.String, java.lang.String, org.xml.sax.Attributes)
 	 */
 	public void startElement(String nameSpaceURI, String localName, String rawName, Attributes attributs) throws SAXException {
-		System.out.println("Ouverture de la balise : " + localName);
+	//	System.out.println("Ouverture de la balise : " + localName);
 
 		if (localName.equals("rules")){
 			for (int index = 0; index < attributs.getLength(); index++) {
 				if(attributs.getLocalName(index).equals("port"))port=Integer.parseInt(attributs.getValue(index));	
+				if(attributs.getLocalName(index).equals("UI"))GUIname=attributs.getValue(index);	
+				if(attributs.getLocalName(index).equals("type")){
+					if(attributs.getValue(index).compareTo("client")==0){
+						type=TYPE.CLIENT;
+						
+						
+					}
+					
+				}
 			}
-			System.out.println("port! = "+port);
+		//	System.out.println("port! = "+port);
 		}
 
 		if (localName.equals("condition")){
@@ -99,7 +111,7 @@ public class SimpleContentHandler implements ContentHandler {
 			functionCondition = attributs.getValue("function");
 			paramsCondition= new LinkedList<String>();
 			for (int index = 1; index < attributs.getLength(); index++) {
-				System.out.println("Condition>>>"+attributs.getValue("arg"+index));
+			//	System.out.println("Condition>>>"+attributs.getValue("arg"+index));
 				paramsCondition.add(attributs.getValue("arg"+index)); //on recupere les arguments
 			}
 			//TODO
@@ -153,7 +165,7 @@ public class SimpleContentHandler implements ContentHandler {
 	//	System.out.print("Fermeture de la balise : " + localName);
 
 		if (localName.equals("condition")){
-			System.out.println("------------------condition added:");
+			//System.out.println("------------------condition added:");
 			//for (int i=0;i<ActionsToadd.size();i++)
 			//{
 				//System.out.println("cond name:"+ActionsToadd.get(i).);

@@ -1,10 +1,13 @@
 
-<rules port="6667" mode="TCP">
+<rules port="6667"  UI="UIPushState" type="server">
+
+
 	<state id="0" >
 		<condition function="regex" arg1="" tostate="1">
 		<action name="SendMessage"  arg1=":irc_server NOTICE AUTH :*** Looking up your hostname...\n"></action>
 		<action name="SendMessage"  arg1=":irc_server NOTICE AUTH :*** Checking Ident\n"></action>
 		<action name="SendMessage"  arg1=":irc_server NOTICE AUTH :*** Found your hostname\n"></action>
+	
 		</condition>
 	</state>
 

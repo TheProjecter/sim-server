@@ -21,9 +21,9 @@ public class SendMessage extends Actionnable {
 		try {
 			
 			pmes = ValParam(getParamAction(0), plc);
-			System.out.println("Sending: "+pmes);
+			//System.out.println("Sending: "+pmes);
 			
-			System.out.println("Sending: "+plc.getIdname());
+			//System.out.println("Sending: "+plc.getIdname());
 			ma.SendString(pmes,plc);
 		} catch (Exception e1) {
 			e1.printStackTrace();

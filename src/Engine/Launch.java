@@ -8,20 +8,20 @@ import javax.swing.JFrame;
 
 
 
-public class Moteur extends JFrame{
+public class Launch {
 
 	private static final long serialVersionUID = 1L;
 
 	public static void main(String[] args) {
 
-		//generer Conditions
+		//generate Conditions
 		LinkedList<Condition> protocol;
 		try {
 			GenerateProtocol gp= new GenerateProtocol("IRC.xml");
 			protocol = gp.getCondition();
 			
 		//	System.out.println("nombre de regle:"+protocol.size());
-			new ListenerServer(gp.getport(),protocol);	
+			new ListenerServer(gp.getport(),protocol,gp.getGUIName(),gp.getType());	
 		
 		} catch (Exception e) {
 		
@@ -35,7 +35,7 @@ public class Moteur extends JFrame{
 
 	}
 
-	public Moteur() {
+	public Launch() {
 		super();
 	}
 }

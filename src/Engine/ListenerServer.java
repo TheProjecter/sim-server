@@ -1,21 +1,45 @@
 package Engine;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.LinkedList;
 
+import javax.swing.JFrame;
+import javax.swing.event.EventListenerList;
+
+import Engine.SimpleContentHandler.TYPE;
+import Event.ServerListener;
+import GUI.UIPushState;
+import Model.Conditionnable;
+import Model.GUI;
 
 
-public class ListenerServer {
 
+public class ListenerServer extends JFrame{
 
+	private final EventListenerList listeners = new EventListenerList();
 	private boolean listen=true;
 	public LinkedList<ListenerClient> clients= new LinkedList<ListenerClient>();
 	LinkedList<Condition> conditions;
 //(jung implementation?)
 
 
-	public ListenerServer(int port, LinkedList<Condition> protocol) {
+	public ListenerServer(int port, LinkedList<Condition> protocol, String GUIName,TYPE type) {
+		if(GUIName!=""){
+			try{
+			Constructor classUI =   Class.forName("GUI."+GUIName).getConstructor();
+			GUI objectUI = (GUI)classUI.newInstance();
+			
+			objectUI.start(this);
+			}catch( Exception e){
+				System.out.println("invalid UI" + GUIName +" exception:"+e);
+				
+			}
+		
+			
+		}
+		
 		conditions=protocol;
 
 		ServerSocket sp;
@@ -47,6 +71,40 @@ public class ListenerServer {
 
 	}
 
+	
+	
+	
+	 protected void fireStateChanged(String id,String  newState) {
+	        for(ServerListener listener : getServerListeners()) {
+	        		listener.stateChanged( id,newState);
+	        } 
+}
+	 protected	void fireConnectedSocket(String id) {
+	        for(ServerListener listener : getServerListeners()) {
+        		listener.connectedSocket( id);
+        } 
+}
+	 protected	void fireDisconnectedSocket(String id) {
+	        for(ServerListener listener : getServerListeners()) {
+        		listener.disconnectedSocket( id);
+        } 
+}
+	 protected		void fireActionPerformed(String id,String actionName) {
+	        for(ServerListener listener : getServerListeners()) {
+        		listener.ActionPerformed( id,actionName);
+        } 
+}
+
+public ServerListener[] getServerListeners() {
+     return listeners.getListeners(ServerListener.class);
+ }
+public void addServerListener(ServerListener listener) {
+     listeners.add(ServerListener.class, listener);
+ }
+ 
+ public void removeServerListener(ServerListener listener) {
+     listeners.remove(ServerListener.class, listener);
+ }
 
 	public void perform_protocol(ListenerClient listenerClient){
 		for (int i=0;i<conditions.size();i++){

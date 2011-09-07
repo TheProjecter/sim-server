@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<BugCollection version="1.3.9" sequence="0" timestamp="1315225801445" analysisTimestamp="1315242925220" release="">
+  <Project projectName="">
+    <Jar>C:\Users\Nico4486\workspace\sim-server\bin</Jar>
+    <SuppressionFilter>
+      <LastVersion value="-1" relOp="NEQ"/>
+    </SuppressionFilter>
+  </Project>
+  <BugInstance type="OBL_UNSATISFIED_OBLIGATION" priority="2" abbrev="OBL" category="EXPERIMENTAL">
+    <Class classname="Actions.PipeFromFile">
+      <SourceLine classname="Actions.PipeFromFile" sourcefile="PipeFromFile.java" sourcepath="Actions/PipeFromFile.java"/>
+    </Class>
+    <Method classname="Actions.PipeFromFile" name="&lt;init&gt;" signature="(Ljava/io/OutputStream;Ljava/lang/String;)V" isStatic="false">
+      <SourceLine classname="Actions.PipeFromFile" start="18" end="32" startBytecode="0" endBytecode="225" sourcefile="PipeFromFile.java" sourcepath="Actions/PipeFromFile.java"/>
+    </Method>
+    <Class classname="java.io.InputStream" role="CLASS_REFTYPE">
+      <SourceLine classname="java.io.InputStream"/>
+    </Class>
+    <Int value="1" role="INT_OBLIGATIONS_REMAINING"/>
+    <SourceLine classname="Actions.PipeFromFile" start="20" end="20" startBytecode="9" endBytecode="9" sourcefile="PipeFromFile.java" sourcepath="Actions/PipeFromFile.java" role="SOURCE_LINE_OBLIGATION_CREATED"/>
+    <SourceLine classname="Actions.PipeFromFile" start="21" end="21" startBytecode="13" endBytecode="13" sourcefile="PipeFromFile.java" sourcepath="Actions/PipeFromFile.java" role="SOURCE_LINE_PATH_CONTINUES"/>
+    <SourceLine classname="Actions.PipeFromFile" start="22" end="22" startBytecode="16" endBytecode="16" sourcefile="PipeFromFile.java" sourcepath="Actions/PipeFromFile.java" role="SOURCE_LINE_PATH_CONTINUES"/>
+    <SourceLine classname="Actions.PipeFromFile" start="32" end="32" startBytecode="44" endBytecode="44" sourcefile="PipeFromFile.java" sourcepath="Actions/PipeFromFile.java" role="SOURCE_LINE_PATH_CONTINUES"/>
+    <String value="{InputStream x 1}" role="STRING_REMAINING_OBLIGATIONS"/>
+  </BugInstance>
+  <BugInstance type="OS_OPEN_STREAM" priority="2" abbrev="OS" category="BAD_PRACTICE">
+    <Class classname="Actions.PipeFromFile">
+      <SourceLine classname="Actions.PipeFromFile" sourcefile="PipeFromFile.java" sourcepath="Actions/PipeFromFile.java"/>
+    </Class>
+    <Method classname="Actions.PipeFromFile" name="&lt;init&gt;" signature="(Ljava/io/OutputStream;Ljava/lang/String;)V" isStatic="false">
+      <SourceLine classname="Actions.PipeFromFile" start="18" end="32" startBytecode="0" endBytecode="23" sourcefile="PipeFromFile.java" sourcepath="Actions/PipeFromFile.java"/>
+    </Method>
+    <Type descriptor="Ljava/io/InputStream;" role="TYPE_CLOSEIT">
+      <SourceLine classname="java.io.InputStream"/>
+    </Type>
+    <SourceLine classname="Actions.PipeFromFile" start="20" end="20" startBytecode="4" endBytecode="4" sourcefile="PipeFromFile.java" sourcepath="Actions/PipeFromFile.java"/>
+  </BugInstance>
+  <BugInstance type="DE_MIGHT_IGNORE" priority="2" abbrev="DE" category="BAD_PRACTICE">
+    <Class classname="Actions.PipeWithServer">
+      <SourceLine classname="Actions.PipeWithServer" sourcefile="PipeWithServer.java" sourcepath="Actions/PipeWithServer.java"/>
+    </Class>
+    <Method classname="Actions.PipeWithServer" name="start" signature="(LEngine/ListenerClient;)V" isStatic="false">
+      <SourceLine classname="Actions.PipeWithServer" start="27" end="60" startBytecode="0" endBytecode="266" sourcefile="PipeWithServer.java" sourcepath="Actions/PipeWithServer.java"/>
+    </Method>
+    <Class classname="java.lang.Exception" role="CLASS_EXCEPTION">
+      <SourceLine classname="java.lang.Exception"/>
+    </Class>
+    <SourceLine classname="Actions.PipeWithServer" start="57" end="57" startBytecode="92" endBytecode="92" sourcefile="PipeWithServer.java" sourcepath="Actions/PipeWithServer.java"/>
+  </BugInstance>
+  <BugInstance type="REC_CATCH_EXCEPTION" priority="2" abbrev="REC" category="STYLE">
+    <Class classname="Actions.PipeWithServer">
+      <SourceLine classname="Actions.PipeWithServer" sourcefile="PipeWithServer.java" sourcepath="Actions/PipeWithServer.java"/>
+    </Class>
+    <Method classname="Actions.PipeWithServer" name="start" signature="(LEngine/ListenerClient;)V" isStatic="false">
+      <SourceLine classname="Actions.PipeWithServer" start="27" end="60" startBytecode="0" endBytecode="266" sourcefile="PipeWithServer.java" sourcepath="Actions/PipeWithServer.java"/>
+    </Method>
+    <SourceLine classname="Actions.PipeWithServer" start="57" end="57" startBytecode="92" endBytecode="92" sourcefile="PipeWithServer.java" sourcepath="Actions/PipeWithServer.java"/>
+  </BugInstance>
+  <BugInstance type="SS_SHOULD_BE_STATIC" priority="2" abbrev="SS" category="PERFORMANCE">
+    <Class classname="Actions.PlaySound">
+      <SourceLine classname="Actions.PlaySound" sourcefile="PlaySound.java" sourcepath="Actions/PlaySound.java"/>
+    </Class>
+    <Field classname="Actions.PlaySound" name="EXTERNAL_BUFFER_SIZE" signature="I" isStatic="false">
+      <SourceLine classname="Actions.PlaySound" sourcefile="PlaySound.java" sourcepath="Actions/PlaySound.java"/>
+    </Field>
+    <SourceLine classname="Actions.PlaySound" start="34" end="34" startBytecode="9" endBytecode="9" sourcefile="PlaySound.java" sourcepath="Actions/PlaySound.java"/>
+  </BugInstance>
+  <BugInstance type="NM_METHOD_NAMING_CONVENTION" priority="2" abbrev="Nm" category="BAD_PRACTICE">
+    <Class classname="Attributes.D">
+      <SourceLine classname="Attributes.D" sourcefile="D.java" sourcepath="Attributes/D.java"/>
+    </Class>
+    <Method classname="Attributes.D" name="Get" signature="(Ljava/lang/String;LEngine/Condition;LEngine/ListenerClient;)Ljava/lang/String;" isStatic="false">
+      <SourceLine classname="Attributes.D" start="13" end="13" startBytecode="0" endBytecode="82" sourcefile="D.java" sourcepath="Attributes/D.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="NM_METHOD_NAMING_CONVENTION" priority="2" abbrev="Nm" category="BAD_PRACTICE">
+    <Class classname="Attributes.G">
+      <SourceLine classname="Attributes.G" sourcefile="G.java" sourcepath="Attributes/G.java"/>
+    </Class>
+    <Method classname="Attributes.G" name="Get" signature="(Ljava/lang/String;LEngine/Condition;LEngine/ListenerClient;)Ljava/lang/String;" isStatic="false">
+      <SourceLine classname="Attributes.G" start="11" end="11" startBytecode="0" endBytecode="87" sourcefile="G.java" sourcepath="Attributes/G.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="NM_METHOD_NAMING_CONVENTION" priority="2" abbrev="Nm" category="BAD_PRACTICE">
+    <Class classname="Attributes.ID">
+      <SourceLine classname="Attributes.ID" sourcefile="ID.java" sourcepath="Attributes/ID.java"/>
+    </Class>
+    <Method classname="Attributes.ID" name="Get" signature="(Ljava/lang/String;LEngine/Condition;LEngine/ListenerClient;)Ljava/lang/String;" isStatic="false">
+      <SourceLine classname="Attributes.ID" start="11" end="11" startBytecode="0" endBytecode="76" sourcefile="ID.java" sourcepath="Attributes/ID.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="NM_METHOD_NAMING_CONVENTION" priority="2" abbrev="Nm" category="BAD_PRACTICE">
+    <Class classname="Attributes.IP">
+      <SourceLine classname="Attributes.IP" sourcefile="IP.java" sourcepath="Attributes/IP.java"/>
+    </Class>
+    <Method classname="Attributes.IP" name="Get" signature="(Ljava/lang/String;LEngine/Condition;LEngine/ListenerClient;)Ljava/lang/String;" isStatic="false">
+      <SourceLine classname="Attributes.IP" start="11" end="11" startBytecode="0" endBytecode="82" sourcefile="IP.java" sourcepath="Attributes/IP.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="DM_NEXTINT_VIA_NEXTDOUBLE" priority="2" abbrev="Dm" category="PERFORMANCE">
+    <Class classname="Attributes.R">
+      <SourceLine classname="Attributes.R" sourcefile="R.java" sourcepath="Attributes/R.java"/>
+    </Class>
+    <Method classname="Attributes.R" name="Get" signature="(Ljava/lang/String;LEngine/Condition;LEngine/ListenerClient;)Ljava/lang/String;" isStatic="false">
+      <SourceLine classname="Attributes.R" start="11" end="11" startBytecode="0" endBytecode="93" sourcefile="R.java" sourcepath="Attributes/R.java"/>
+    </Method>
+    <SourceLine classname="Attributes.R" start="11" end="11" startBytecode="14" endBytecode="14" sourcefile="R.java" sourcepath="Attributes/R.java"/>
+  </BugInstance>
+  <BugInstance type="NM_METHOD_NAMING_CONVENTION" priority="2" abbrev="Nm" category="BAD_PRACTICE">
+    <Class classname="Attributes.S">
+      <SourceLine classname="Attributes.S" sourcefile="S.java" sourcepath="Attributes/S.java"/>
+    </Class>
+    <Method classname="Attributes.S" name="Get" signature="(Ljava/lang/String;LEngine/Condition;LEngine/ListenerClient;)Ljava/lang/String;" isStatic="false">
+      <SourceLine classname="Attributes.S" start="11" end="11" startBytecode="0" endBytecode="89" sourcefile="S.java" sourcepath="Attributes/S.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="NM_METHOD_NAMING_CONVENTION" priority="2" abbrev="Nm" category="BAD_PRACTICE">
+    <Class classname="Attributes.V">
+      <SourceLine classname="Attributes.V" sourcefile="V.java" sourcepath="Attributes/V.java"/>
+    </Class>
+    <Method classname="Attributes.V" name="Get" signature="(Ljava/lang/String;LEngine/Condition;LEngine/ListenerClient;)Ljava/lang/String;" isStatic="false">
+      <SourceLine classname="Attributes.V" start="11" end="11" startBytecode="0" endBytecode="85" sourcefile="V.java" sourcepath="Attributes/V.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="NM_CLASS_NAMING_CONVENTION" priority="2" abbrev="Nm" category="BAD_PRACTICE">
+    <Class classname="Conditions.compareValue">
+      <SourceLine classname="Conditions.compareValue" sourcefile="compareValue.java" sourcepath="Conditions/compareValue.java"/>
+    </Class>
+  </BugInstance>
+  <BugInstance type="NM_METHOD_NAMING_CONVENTION" priority="2" abbrev="Nm" category="BAD_PRACTICE">
+    <Class classname="Conditions.compareValue">
+      <SourceLine classname="Conditions.compareValue" sourcefile="compareValue.java" sourcepath="Conditions/compareValue.java"/>
+    </Class>
+    <Method classname="Conditions.compareValue" name="Test" signature="(LEngine/Condition;LEngine/ListenerClient;)Z" isStatic="false">
+      <SourceLine classname="Conditions.compareValue" start="21" end="48" startBytecode="0" endBytecode="642" sourcefile="compareValue.java" sourcepath="Conditions/compareValue.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="NM_CLASS_NAMING_CONVENTION" priority="2" abbrev="Nm" category="BAD_PRACTICE">
+    <Class classname="Conditions.regex">
+      <SourceLine classname="Conditions.regex" sourcefile="regex.java" sourcepath="Conditions/regex.java"/>
+    </Class>
+  </BugInstance>
+  <BugInstance type="NM_METHOD_NAMING_CONVENTION" priority="2" abbrev="Nm" category="BAD_PRACTICE">
+    <Class classname="Conditions.regex">
+      <SourceLine classname="Conditions.regex" sourcefile="regex.java" sourcepath="Conditions/regex.java"/>
+    </Class>
+    <Method classname="Conditions.regex" name="Test" signature="(LEngine/Condition;LEngine/ListenerClient;)Z" isStatic="false">
+      <SourceLine classname="Conditions.regex" start="25" end="26" startBytecode="0" endBytecode="88" sourcefile="regex.java" sourcepath="Conditions/regex.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="NM_METHOD_NAMING_CONVENTION" priority="2" abbrev="Nm" category="BAD_PRACTICE">
+    <Class classname="Engine.Condition">
+      <SourceLine classname="Engine.Condition" sourcefile="Condition.java" sourcepath="Engine/Condition.java"/>
+    </Class>
+    <Method classname="Engine.Condition" name="ValParam" signature="(Ljava/lang/String;LEngine/ListenerClient;)Ljava/lang/String;" isStatic="false">
+      <SourceLine classname="Engine.Condition" start="97" end="159" startBytecode="0" endBytecode="728" sourcefile="Condition.java" sourcepath="Engine/Condition.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="REC_CATCH_EXCEPTION" priority="2" abbrev="REC" category="STYLE">
+    <Class classname="Engine.Condition">
+      <SourceLine classname="Engine.Condition" sourcefile="Condition.java" sourcepath="Engine/Condition.java"/>
+    </Class>
+    <Method classname="Engine.Condition" name="ValParam" signature="(Ljava/lang/String;LEngine/ListenerClient;)Ljava/lang/String;" isStatic="false">
+      <SourceLine classname="Engine.Condition" start="97" end="159" startBytecode="0" endBytecode="728" sourcefile="Condition.java" sourcepath="Engine/Condition.java"/>
+    </Method>
+    <SourceLine classname="Engine.Condition" start="149" end="149" startBytecode="351" endBytecode="351" sourcefile="Condition.java" sourcepath="Engine/Condition.java"/>
+  </BugInstance>
+  <BugInstance type="NM_METHOD_NAMING_CONVENTION" priority="2" abbrev="Nm" category="BAD_PRACTICE">
+    <Class classname="Engine.ListenerClient">
+      <SourceLine classname="Engine.ListenerClient" sourcefile="ListenerClient.java" sourcepath="Engine/ListenerClient.java"/>
+    </Class>
+    <Method classname="Engine.ListenerClient" name="ConnectionClose" signature="()V" isStatic="false">
+      <SourceLine classname="Engine.ListenerClient" start="145" end="152" startBytecode="0" endBytecode="163" sourcefile="ListenerClient.java" sourcepath="Engine/ListenerClient.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="IL_INFINITE_LOOP" priority="1" abbrev="IL" category="CORRECTNESS">
+    <Class classname="Engine.ListenerServer">
+      <SourceLine classname="Engine.ListenerServer" sourcefile="ListenerServer.java" sourcepath="Engine/ListenerServer.java"/>
+    </Class>
+    <Method classname="Engine.ListenerServer" name="&lt;init&gt;" signature="(ILjava/util/LinkedList;)V" isStatic="false">
+      <SourceLine classname="Engine.ListenerServer" start="18" end="48" startBytecode="0" endBytecode="455" sourcefile="ListenerServer.java" sourcepath="Engine/ListenerServer.java"/>
+    </Method>
+    <SourceLine classname="Engine.ListenerServer" start="24" end="24" startBytecode="169" endBytecode="169" sourcefile="ListenerServer.java" sourcepath="Engine/ListenerServer.java"/>
+  </BugInstance>
+  <BugInstance type="NM_METHOD_NAMING_CONVENTION" priority="2" abbrev="Nm" category="BAD_PRACTICE">
+    <Class classname="Engine.ListenerServer">
+      <SourceLine classname="Engine.ListenerServer" sourcefile="ListenerServer.java" sourcepath="Engine/ListenerServer.java"/>
+    </Class>
+    <Method classname="Engine.ListenerServer" name="GetClient" signature="(Ljava/lang/String;)LEngine/ListenerClient;" isStatic="false">
+      <SourceLine classname="Engine.ListenerServer" start="78" end="83" startBytecode="0" endBytecode="145" sourcefile="ListenerServer.java" sourcepath="Engine/ListenerServer.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="SC_START_IN_CTOR" priority="2" abbrev="SC" category="MT_CORRECTNESS">
+    <Class classname="Engine.ListenerServer">
+      <SourceLine classname="Engine.ListenerServer" sourcefile="ListenerServer.java" sourcepath="Engine/ListenerServer.java"/>
+    </Class>
+    <Method classname="Engine.ListenerServer" name="&lt;init&gt;" signature="(ILjava/util/LinkedList;)V" isStatic="false">
+      <SourceLine classname="Engine.ListenerServer" start="18" end="48" startBytecode="0" endBytecode="455" sourcefile="ListenerServer.java" sourcepath="Engine/ListenerServer.java"/>
+    </Method>
+    <Method classname="java.lang.Thread" name="start" signature="()V" isStatic="false" role="METHOD_CALLED">
+      <SourceLine classname="java.lang.Thread"/>
+    </Method>
+    <SourceLine classname="Engine.ListenerServer" start="34" end="34" startBytecode="146" endBytecode="146" sourcefile="ListenerServer.java" sourcepath="Engine/ListenerServer.java"/>
+  </BugInstance>
+  <BugInstance type="URF_UNREAD_FIELD" priority="2" abbrev="UrF" category="PERFORMANCE">
+    <Class classname="Engine.SimpleContentHandler">
+      <SourceLine classname="Engine.SimpleContentHandler" sourcefile="SimpleContentHandler.java" sourcepath="Engine/SimpleContentHandler.java"/>
+    </Class>
+    <Field classname="Engine.SimpleContentHandler" name="locator" signature="Lorg/xml/sax/Locator;" isStatic="false">
+      <SourceLine classname="Engine.SimpleContentHandler" sourcefile="SimpleContentHandler.java" sourcepath="Engine/SimpleContentHandler.java"/>
+    </Field>
+    <SourceLine classname="Engine.SimpleContentHandler" start="24" end="24" startBytecode="58" endBytecode="58" sourcefile="SimpleContentHandler.java" sourcepath="Engine/SimpleContentHandler.java"/>
+  </BugInstance>
+  <BugInstance type="NM_METHOD_NAMING_CONVENTION" priority="2" abbrev="Nm" category="BAD_PRACTICE">
+    <Class classname="Model.Actionnable">
+      <SourceLine classname="Model.Actionnable" sourcefile="Actionnable.java" sourcepath="Model/Actionnable.java"/>
+    </Class>
+    <Method classname="Model.Actionnable" name="ValParam" signature="(Ljava/lang/String;LEngine/ListenerClient;)Ljava/lang/String;" isStatic="false">
+      <SourceLine classname="Model.Actionnable" start="49" end="49" startBytecode="0" endBytecode="71" sourcefile="Actionnable.java" sourcepath="Model/Actionnable.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="NM_METHOD_NAMING_CONVENTION" priority="2" abbrev="Nm" category="BAD_PRACTICE">
+    <Class classname="Model.Attributable">
+      <SourceLine classname="Model.Attributable" sourcefile="Attributable.java" sourcepath="Model/Attributable.java"/>
+    </Class>
+    <Method classname="Model.Attributable" name="Get" signature="(Ljava/lang/String;LEngine/Condition;LEngine/ListenerClient;)Ljava/lang/String;" isStatic="false">
+      <SourceLine classname="Model.Attributable" start="20" end="20" startBytecode="0" endBytecode="74" sourcefile="Attributable.java" sourcepath="Model/Attributable.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="UUF_UNUSED_FIELD" priority="2" abbrev="UuF" category="PERFORMANCE">
+    <Class classname="Model.Attributable">
+      <SourceLine classname="Model.Attributable" sourcefile="Attributable.java" sourcepath="Model/Attributable.java"/>
+    </Class>
+    <Field classname="Model.Attributable" name="attribute" signature="Ljava/lang/String;" isStatic="false">
+      <SourceLine classname="Model.Attributable" sourcefile="Attributable.java" sourcepath="Model/Attributable.java"/>
+    </Field>
+  </BugInstance>
+  <BugInstance type="NM_METHOD_NAMING_CONVENTION" priority="2" abbrev="Nm" category="BAD_PRACTICE">
+    <Class classname="Model.BroadcastingAction">
+      <SourceLine classname="Model.BroadcastingAction" sourcefile="BroadcastingAction.java" sourcepath="Model/BroadcastingAction.java"/>
+    </Class>
+    <Method classname="Model.BroadcastingAction" name="SendString" signature="(Ljava/lang/String;LEngine/ListenerClient;)V" isStatic="false">
+      <SourceLine classname="Model.BroadcastingAction" start="18" end="44" startBytecode="0" endBytecode="378" sourcefile="BroadcastingAction.java" sourcepath="Model/BroadcastingAction.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="NM_CLASS_NAMING_CONVENTION" priority="2" abbrev="Nm" category="BAD_PRACTICE">
+    <Class classname="Model.BroadcastingAction$destination">
+      <SourceLine classname="Model.BroadcastingAction$destination" sourcefile="BroadcastingAction.java" sourcepath="Model/BroadcastingAction.java"/>
+    </Class>
+  </BugInstance>
+  <BugInstance type="NM_METHOD_NAMING_CONVENTION" priority="2" abbrev="Nm" category="BAD_PRACTICE">
+    <Class classname="Model.Conditionnable">
+      <SourceLine classname="Model.Conditionnable" sourcefile="Conditionnable.java" sourcepath="Model/Conditionnable.java"/>
+    </Class>
+    <Method classname="Model.Conditionnable" name="Test" signature="(LEngine/Condition;LEngine/ListenerClient;)Z" isStatic="false">
+      <SourceLine classname="Model.Conditionnable" start="17" end="17" startBytecode="0" endBytecode="63" sourcefile="Conditionnable.java" sourcepath="Model/Conditionnable.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="NM_METHOD_NAMING_CONVENTION" priority="2" abbrev="Nm" category="BAD_PRACTICE">
+    <Class classname="Model.Conditionnable">
+      <SourceLine classname="Model.Conditionnable" sourcefile="Conditionnable.java" sourcepath="Model/Conditionnable.java"/>
+    </Class>
+    <Method classname="Model.Conditionnable" name="ValParam" signature="(LEngine/Condition;Ljava/lang/String;LEngine/ListenerClient;)Ljava/lang/String;" isStatic="false">
+      <SourceLine classname="Model.Conditionnable" start="21" end="21" startBytecode="0" endBytecode="78" sourcefile="Conditionnable.java" sourcepath="Model/Conditionnable.java"/>
+    </Method>
+  </BugInstance>
+  <Errors errors="0" missingClasses="0"></Errors>
+  <FindBugsSummary timestamp="Mon, 5 Sep 2011 14:30:01 +0200" total_classes="39" referenced_classes="332" total_bugs="30" total_size="783" num_packages="5" vm_version="19.1-b02" cpu_seconds="34.21" clock_seconds="155.40" peak_mbytes="164.08" alloc_mbytes="682.69" gc_seconds="0.50" priority_2="29" priority_1="1">
+    <PackageStats package="Actions" total_bugs="5" total_types="16" total_size="245" priority_2="5">
+      <ClassStats class="Actions.CloseConnection" sourceFile="CloseConnection.java" interface="false" size="7" bugs="0"/>
+      <ClassStats class="Actions.ExecutionFile" sourceFile="ExecutionFile.java" interface="false" size="21" bugs="0"/>
+      <ClassStats class="Actions.PipeFromFile" sourceFile="PipeFromFile.java" interface="false" size="12" bugs="2" priority_2="2"/>
+      <ClassStats class="Actions.PipeToFile" sourceFile="PipeToFile.java" interface="false" size="11" bugs="0"/>
+      <ClassStats class="Actions.PipeWithServer" sourceFile="PipeWithServer.java" interface="false" size="17" bugs="2" priority_2="2"/>
+      <ClassStats class="Actions.PipeWithServer$1" sourceFile="PipeWithServer.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="Actions.PlaySound" sourceFile="PlaySound.java" interface="false" size="62" bugs="1" priority_2="1"/>
+      <ClassStats class="Actions.PlaySound$Position" sourceFile="PlaySound.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="Actions.SendConnectedTo" sourceFile="SendConnectedTo.java" interface="false" size="13" bugs="0"/>
+      <ClassStats class="Actions.SendFile" sourceFile="SendFile.java" interface="false" size="11" bugs="0"/>
+      <ClassStats class="Actions.SendMessage" sourceFile="SendMessage.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="Actions.SendMessageTo" sourceFile="SendMessageTo.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="Actions.SetHashVar" sourceFile="SetHashVar.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="Actions.SetIdname" sourceFile="SetIdname.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="Actions.SetVar" sourceFile="SetVar.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="Actions.StoreToFile" sourceFile="StoreToFile.java" interface="false" size="13" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="Attributes" total_bugs="7" total_types="7" total_size="35" priority_2="7">
+      <ClassStats class="Attributes.D" sourceFile="D.java" interface="false" size="5" bugs="1" priority_2="1"/>
+      <ClassStats class="Attributes.G" sourceFile="G.java" interface="false" size="5" bugs="1" priority_2="1"/>
+      <ClassStats class="Attributes.ID" sourceFile="ID.java" interface="false" size="5" bugs="1" priority_2="1"/>
+      <ClassStats class="Attributes.IP" sourceFile="IP.java" interface="false" size="5" bugs="1" priority_2="1"/>
+      <ClassStats class="Attributes.R" sourceFile="R.java" interface="false" size="5" bugs="1" priority_2="1"/>
+      <ClassStats class="Attributes.S" sourceFile="S.java" interface="false" size="5" bugs="1" priority_2="1"/>
+      <ClassStats class="Attributes.V" sourceFile="V.java" interface="false" size="5" bugs="1" priority_2="1"/>
+    </PackageStats>
+    <PackageStats package="Conditions" total_bugs="4" total_types="2" total_size="37" priority_2="4">
+      <ClassStats class="Conditions.compareValue" sourceFile="compareValue.java" interface="false" size="25" bugs="2" priority_2="2"/>
+      <ClassStats class="Conditions.regex" sourceFile="regex.java" interface="false" size="12" bugs="2" priority_2="2"/>
+    </PackageStats>
+    <PackageStats package="Engine" total_bugs="7" total_types="9" total_size="386" priority_2="6" priority_1="1">
+      <ClassStats class="Engine.Actions" sourceFile="Actions.java" interface="false" size="15" bugs="0"/>
+      <ClassStats class="Engine.Condition" sourceFile="Condition.java" interface="false" size="83" bugs="2" priority_2="2"/>
+      <ClassStats class="Engine.GenerateProtocol" sourceFile="GenerateProtocol.java" interface="false" size="22" bugs="0"/>
+      <ClassStats class="Engine.ListenerClient" sourceFile="ListenerClient.java" interface="false" size="88" bugs="1" priority_2="1"/>
+      <ClassStats class="Engine.ListenerClient$1" sourceFile="ListenerClient.java" interface="false" size="13" bugs="0"/>
+      <ClassStats class="Engine.ListenerServer" sourceFile="ListenerServer.java" interface="false" size="45" bugs="3" priority_2="2" priority_1="1"/>
+      <ClassStats class="Engine.Moteur" sourceFile="Moteur.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="Engine.SimpleContentHandler" sourceFile="SimpleContentHandler.java" interface="false" size="76" bugs="1" priority_2="1"/>
+      <ClassStats class="Engine.TestRegex" sourceFile="TestRegex.java" interface="false" size="32" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="Model" total_bugs="7" total_types="5" total_size="80" priority_2="7">
+      <ClassStats class="Model.Actionnable" sourceFile="Actionnable.java" interface="false" size="31" bugs="1" priority_2="1"/>
+      <ClassStats class="Model.Attributable" sourceFile="Attributable.java" interface="false" size="7" bugs="2" priority_2="2"/>
+      <ClassStats class="Model.BroadcastingAction" sourceFile="BroadcastingAction.java" interface="false" size="19" bugs="1" priority_2="1"/>
+      <ClassStats class="Model.BroadcastingAction$destination" sourceFile="BroadcastingAction.java" interface="false" size="11" bugs="1" priority_2="1"/>
+      <ClassStats class="Model.Conditionnable" sourceFile="Conditionnable.java" interface="false" size="12" bugs="2" priority_2="2"/>
+    </PackageStats>
+    <FindBugsProfile>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindBadCast2" totalMilliseconds="11" invocations="39" avgMicrosecondsPerInvocation="286" maxMicrosecondsPerInvocation="5985" standardDeviationMircosecondsPerInvocation="953"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ReverseDepthFirstSearchFactory" totalMilliseconds="11" invocations="126" avgMicrosecondsPerInvocation="90" maxMicrosecondsPerInvocation="755" standardDeviationMircosecondsPerInvocation="127"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.Naming" totalMilliseconds="11" invocations="39" avgMicrosecondsPerInvocation="302" maxMicrosecondsPerInvocation="841" standardDeviationMircosecondsPerInvocation="201"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindReturnRef" totalMilliseconds="12" invocations="39" avgMicrosecondsPerInvocation="314" maxMicrosecondsPerInvocation="6153" standardDeviationMircosecondsPerInvocation="961"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindHEmismatch" totalMilliseconds="12" invocations="39" avgMicrosecondsPerInvocation="320" maxMicrosecondsPerInvocation="1703" standardDeviationMircosecondsPerInvocation="389"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ClassContextClassAnalysisEngine" totalMilliseconds="13" invocations="393" avgMicrosecondsPerInvocation="33" maxMicrosecondsPerInvocation="3468" standardDeviationMircosecondsPerInvocation="174"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.Methods" totalMilliseconds="13" invocations="332" avgMicrosecondsPerInvocation="40" maxMicrosecondsPerInvocation="3147" standardDeviationMircosecondsPerInvocation="187"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.DepthFirstSearchFactory" totalMilliseconds="13" invocations="151" avgMicrosecondsPerInvocation="88" maxMicrosecondsPerInvocation="790" standardDeviationMircosecondsPerInvocation="125"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.DuplicateBranches" totalMilliseconds="13" invocations="39" avgMicrosecondsPerInvocation="355" maxMicrosecondsPerInvocation="9313" standardDeviationMircosecondsPerInvocation="1460"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteNonNullAnnotations" totalMilliseconds="16" invocations="332" avgMicrosecondsPerInvocation="48" maxMicrosecondsPerInvocation="1111" standardDeviationMircosecondsPerInvocation="100"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNullDeref" totalMilliseconds="16" invocations="39" avgMicrosecondsPerInvocation="432" maxMicrosecondsPerInvocation="4543" standardDeviationMircosecondsPerInvocation="722"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindBadForLoop" totalMilliseconds="17" invocations="39" avgMicrosecondsPerInvocation="460" maxMicrosecondsPerInvocation="11636" standardDeviationMircosecondsPerInvocation="1819"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.MethodFactory" totalMilliseconds="18" invocations="316" avgMicrosecondsPerInvocation="58" maxMicrosecondsPerInvocation="571" standardDeviationMircosecondsPerInvocation="81"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.asm.ClassReaderAnalysisEngine" totalMilliseconds="19" invocations="1304" avgMicrosecondsPerInvocation="14" maxMicrosecondsPerInvocation="6207" standardDeviationMircosecondsPerInvocation="172"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteCheckReturnValueAnnotations" totalMilliseconds="19" invocations="332" avgMicrosecondsPerInvocation="59" maxMicrosecondsPerInvocation="5425" standardDeviationMircosecondsPerInvocation="340"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteJCIPAnnotation" totalMilliseconds="19" invocations="332" avgMicrosecondsPerInvocation="59" maxMicrosecondsPerInvocation="973" standardDeviationMircosecondsPerInvocation="109"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.DumbMethodInvocations" totalMilliseconds="22" invocations="39" avgMicrosecondsPerInvocation="581" maxMicrosecondsPerInvocation="13137" standardDeviationMircosecondsPerInvocation="2049"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.UnreadFields" totalMilliseconds="22" invocations="39" avgMicrosecondsPerInvocation="586" maxMicrosecondsPerInvocation="2483" standardDeviationMircosecondsPerInvocation="606"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.RuntimeExceptionCapture" totalMilliseconds="23" invocations="39" avgMicrosecondsPerInvocation="595" maxMicrosecondsPerInvocation="2450" standardDeviationMircosecondsPerInvocation="602"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.impl.ZipCodeBaseFactory" totalMilliseconds="24" invocations="15" avgMicrosecondsPerInvocation="1617" maxMicrosecondsPerInvocation="21403" standardDeviationMircosecondsPerInvocation="5288"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ConstantPoolGenFactory" totalMilliseconds="24" invocations="39" avgMicrosecondsPerInvocation="629" maxMicrosecondsPerInvocation="18890" standardDeviationMircosecondsPerInvocation="2965"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteCheckReturnValue" totalMilliseconds="24" invocations="332" avgMicrosecondsPerInvocation="73" maxMicrosecondsPerInvocation="10511" standardDeviationMircosecondsPerInvocation="580"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNullDeref$CheckCallSitesAndReturnInstructions" totalMilliseconds="27" invocations="126" avgMicrosecondsPerInvocation="219" maxMicrosecondsPerInvocation="2881" standardDeviationMircosecondsPerInvocation="382"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindRefComparison" totalMilliseconds="40" invocations="39" avgMicrosecondsPerInvocation="1028" maxMicrosecondsPerInvocation="11834" standardDeviationMircosecondsPerInvocation="2243"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.LoadOfKnownNullValue" totalMilliseconds="42" invocations="39" avgMicrosecondsPerInvocation="1078" maxMicrosecondsPerInvocation="6084" standardDeviationMircosecondsPerInvocation="1441"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteNonnullReturnValues" totalMilliseconds="42" invocations="39" avgMicrosecondsPerInvocation="1079" maxMicrosecondsPerInvocation="30698" standardDeviationMircosecondsPerInvocation="4811"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindInconsistentSync2" totalMilliseconds="44" invocations="39" avgMicrosecondsPerInvocation="1143" maxMicrosecondsPerInvocation="20083" standardDeviationMircosecondsPerInvocation="3166"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.SwitchFallthrough" totalMilliseconds="46" invocations="39" avgMicrosecondsPerInvocation="1204" maxMicrosecondsPerInvocation="32572" standardDeviationMircosecondsPerInvocation="5109"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindDeadLocalStores" totalMilliseconds="48" invocations="39" avgMicrosecondsPerInvocation="1243" maxMicrosecondsPerInvocation="23159" standardDeviationMircosecondsPerInvocation="3642"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteAnnotationRetention" totalMilliseconds="50" invocations="332" avgMicrosecondsPerInvocation="152" maxMicrosecondsPerInvocation="32176" standardDeviationMircosecondsPerInvocation="1765"/>
+      <ClassProfile name="edu.umd.cs.findbugs.NonReportingDetectorToDetector2Adapter" totalMilliseconds="54" invocations="4394" avgMicrosecondsPerInvocation="12" maxMicrosecondsPerInvocation="546" standardDeviationMircosecondsPerInvocation="18"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindUnsatisfiedObligation" totalMilliseconds="60" invocations="39" avgMicrosecondsPerInvocation="1550" maxMicrosecondsPerInvocation="50420" standardDeviationMircosecondsPerInvocation="7989"/>
+      <ClassProfile name="edu.umd.cs.findbugs.DetectorToDetector2Adapter" totalMilliseconds="64" invocations="4583" avgMicrosecondsPerInvocation="14" maxMicrosecondsPerInvocation="23615" standardDeviationMircosecondsPerInvocation="351"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.StringConcatenation" totalMilliseconds="66" invocations="39" avgMicrosecondsPerInvocation="1693" maxMicrosecondsPerInvocation="63202" standardDeviationMircosecondsPerInvocation="9978"/>
+      <ClassProfile name="edu.umd.cs.findbugs.ba.npe.TypeQualifierNullnessAnnotationDatabase" totalMilliseconds="78" invocations="1624" avgMicrosecondsPerInvocation="48" maxMicrosecondsPerInvocation="47272" standardDeviationMircosecondsPerInvocation="1173"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ConstantDataflowFactory" totalMilliseconds="93" invocations="126" avgMicrosecondsPerInvocation="743" maxMicrosecondsPerInvocation="9398" standardDeviationMircosecondsPerInvocation="1609"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindOpenStream" totalMilliseconds="94" invocations="39" avgMicrosecondsPerInvocation="2434" maxMicrosecondsPerInvocation="48565" standardDeviationMircosecondsPerInvocation="7871"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.DumbMethods" totalMilliseconds="108" invocations="39" avgMicrosecondsPerInvocation="2774" maxMicrosecondsPerInvocation="94108" standardDeviationMircosecondsPerInvocation="14821"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindSelfComparison" totalMilliseconds="115" invocations="39" avgMicrosecondsPerInvocation="2969" maxMicrosecondsPerInvocation="105837" standardDeviationMircosecondsPerInvocation="16689"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.URLProblems" totalMilliseconds="118" invocations="39" avgMicrosecondsPerInvocation="3030" maxMicrosecondsPerInvocation="86733" standardDeviationMircosecondsPerInvocation="13738"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.ReflectiveClasses" totalMilliseconds="120" invocations="332" avgMicrosecondsPerInvocation="361" maxMicrosecondsPerInvocation="44675" standardDeviationMircosecondsPerInvocation="2589"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteSuppressedWarnings" totalMilliseconds="130" invocations="332" avgMicrosecondsPerInvocation="392" maxMicrosecondsPerInvocation="101833" standardDeviationMircosecondsPerInvocation="5578"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.MethodGenFactory" totalMilliseconds="144" invocations="126" avgMicrosecondsPerInvocation="1150" maxMicrosecondsPerInvocation="67664" standardDeviationMircosecondsPerInvocation="6044"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindRefComparison$SpecialTypeAnalysis" totalMilliseconds="165" invocations="94" avgMicrosecondsPerInvocation="1763" maxMicrosecondsPerInvocation="18498" standardDeviationMircosecondsPerInvocation="3072"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.StreamResourceTracker" totalMilliseconds="166" invocations="60" avgMicrosecondsPerInvocation="2776" maxMicrosecondsPerInvocation="15669" standardDeviationMircosecondsPerInvocation="3201"/>
+      <ClassProfile name="edu.umd.cs.findbugs.ba.obl.ObligationAnalysis" totalMilliseconds="167" invocations="27" avgMicrosecondsPerInvocation="6220" maxMicrosecondsPerInvocation="120253" standardDeviationMircosecondsPerInvocation="22472"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.CalledMethods" totalMilliseconds="168" invocations="332" avgMicrosecondsPerInvocation="506" maxMicrosecondsPerInvocation="41348" standardDeviationMircosecondsPerInvocation="2675"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.CFGFactory" totalMilliseconds="188" invocations="126" avgMicrosecondsPerInvocation="1492" maxMicrosecondsPerInvocation="39332" standardDeviationMircosecondsPerInvocation="4074"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BuildObligationPolicyDatabase" totalMilliseconds="188" invocations="332" avgMicrosecondsPerInvocation="569" maxMicrosecondsPerInvocation="33366" standardDeviationMircosecondsPerInvocation="2168"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.EqualsOperandShouldHaveClassCompatibleWithThis" totalMilliseconds="383" invocations="332" avgMicrosecondsPerInvocation="1154" maxMicrosecondsPerInvocation="149788" standardDeviationMircosecondsPerInvocation="8837"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.LiveLocalStoreDataflowFactory" totalMilliseconds="400" invocations="126" avgMicrosecondsPerInvocation="3179" maxMicrosecondsPerInvocation="297121" standardDeviationMircosecondsPerInvocation="26626"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.OverridingEqualsNotSymmetrical" totalMilliseconds="403" invocations="332" avgMicrosecondsPerInvocation="1215" maxMicrosecondsPerInvocation="88848" standardDeviationMircosecondsPerInvocation="5359"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.JavaClassAnalysisEngine" totalMilliseconds="454" invocations="374" avgMicrosecondsPerInvocation="1215" maxMicrosecondsPerInvocation="150268" standardDeviationMircosecondsPerInvocation="10458"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ValueNumberDataflowFactory" totalMilliseconds="484" invocations="166" avgMicrosecondsPerInvocation="2916" maxMicrosecondsPerInvocation="59901" standardDeviationMircosecondsPerInvocation="7501"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.TypeDataflowFactory" totalMilliseconds="552" invocations="146" avgMicrosecondsPerInvocation="3787" maxMicrosecondsPerInvocation="141026" standardDeviationMircosecondsPerInvocation="13127"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteDirectlyRelevantTypeQualifiers" totalMilliseconds="555" invocations="332" avgMicrosecondsPerInvocation="1672" maxMicrosecondsPerInvocation="161788" standardDeviationMircosecondsPerInvocation="10078"/>
+      <ClassProfile name="edu.umd.cs.findbugs.ba.npe.NullDerefAndRedundantComparisonFinder" totalMilliseconds="555" invocations="126" avgMicrosecondsPerInvocation="4408" maxMicrosecondsPerInvocation="235508" standardDeviationMircosecondsPerInvocation="22093"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.IsNullValueDataflowFactory" totalMilliseconds="783" invocations="126" avgMicrosecondsPerInvocation="6219" maxMicrosecondsPerInvocation="419842" standardDeviationMircosecondsPerInvocation="37457"/>
+      <ClassProfile name="edu.umd.cs.findbugs.FindBugs2" totalMilliseconds="833" invocations="2" avgMicrosecondsPerInvocation="416645" maxMicrosecondsPerInvocation="490344" standardDeviationMircosecondsPerInvocation="73701"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.UnconditionalValueDerefDataflowFactory" totalMilliseconds="856" invocations="126" avgMicrosecondsPerInvocation="6798" maxMicrosecondsPerInvocation="300991" standardDeviationMircosecondsPerInvocation="29838"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="907" invocations="1399" avgMicrosecondsPerInvocation="648" maxMicrosecondsPerInvocation="108962" standardDeviationMircosecondsPerInvocation="4161"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FieldItemSummary" totalMilliseconds="1297" invocations="332" avgMicrosecondsPerInvocation="3909" maxMicrosecondsPerInvocation="283128" standardDeviationMircosecondsPerInvocation="19395"/>
+      <ClassProfile name="edu.umd.cs.findbugs.OpcodeStack$JumpInfoFactory" totalMilliseconds="1747" invocations="5862" avgMicrosecondsPerInvocation="298" maxMicrosecondsPerInvocation="375784" standardDeviationMircosecondsPerInvocation="6833"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="1921" invocations="1401" avgMicrosecondsPerInvocation="1371" maxMicrosecondsPerInvocation="429951" standardDeviationMircosecondsPerInvocation="13667"/>
+    </FindBugsProfile>
+  </FindBugsSummary>
+  <ClassFeatures></ClassFeatures>
+  <History></History>
+</BugCollection>

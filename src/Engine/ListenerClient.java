@@ -43,6 +43,7 @@ public class ListenerClient implements Runnable{
 			char k;
 
 			setIdname(ls.get_Idlibre());
+			ls.fireConnectedSocket(getIdname());
 			System.out.println("id:"+getIdname());
 			ls.perform_protocol(this);
 			while(!fin&& (k=(char)is.read())>0 ){//blocked
@@ -146,6 +147,7 @@ public class ListenerClient implements Runnable{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}finally{
+			this.ls.fireDisconnectedSocket(this.getIdname());
 			this.ls.remove_clients(this);
 		}
 		

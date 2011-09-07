@@ -7,11 +7,20 @@ import org.xml.sax.XMLReader;
 
 import org.xml.sax.helpers.XMLReaderFactory;
 
+import Engine.SimpleContentHandler.TYPE;
+
 
 public class GenerateProtocol {
 
 	private LinkedList<Condition> condition= new LinkedList<Condition>();
 	private int port;
+	private String GUIName="";
+	private TYPE type = TYPE.SERVER;
+	
+	public String getGUIName() {
+		return GUIName;
+	}
+
 	public GenerateProtocol() {
 	
 	}
@@ -25,6 +34,7 @@ public class GenerateProtocol {
 			        saxReader.parse(fic);
 			        condition=sch.getCondition();
 			        port=sch.port;
+			        GUIName = sch.GUIname;
 			} catch (Exception e) {
 				
 				e.printStackTrace();
@@ -37,6 +47,11 @@ public class GenerateProtocol {
 	}
 	public int getport(){
 		return port;
+	}
+
+	public TYPE getType() {
+		
+		return type;
 	}
 
 }
