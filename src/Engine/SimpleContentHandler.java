@@ -98,7 +98,7 @@ public class SimpleContentHandler implements ContentHandler {
 					if(attributs.getValue(index).compareTo("client")==0){
 						type=TYPE.CLIENT;
 						
-						
+				
 					}
 					
 				}

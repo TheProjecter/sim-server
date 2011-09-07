@@ -35,6 +35,7 @@ public class GenerateProtocol {
 			        condition=sch.getCondition();
 			        port=sch.port;
 			        GUIName = sch.GUIname;
+			        type = sch.type;
 			} catch (Exception e) {
 				
 				e.printStackTrace();

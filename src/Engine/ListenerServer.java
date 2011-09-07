@@ -26,6 +26,7 @@ public class ListenerServer extends JFrame{
 
 
 	public ListenerServer(int port, LinkedList<Condition> protocol, String GUIName,TYPE type) {
+		System.out.println(type);
 		if(GUIName!=""){
 			try{
 			Constructor classUI =   Class.forName("GUI."+GUIName).getConstructor();
@@ -41,12 +42,12 @@ public class ListenerServer extends JFrame{
 		}
 		
 		conditions=protocol;
-
+		if(type==TYPE.SERVER){
 		ServerSocket sp;
 		try {
 			sp = new ServerSocket(port);
 			while(this.listen){// serveur multi-user
-				System.out.println(clients.size());
+				//System.out.println(clients.size());
 				System.out.println("listen on port : "+sp.getLocalPort());
 				Socket sa;
 				sa = sp.accept();
@@ -67,6 +68,13 @@ public class ListenerServer extends JFrame{
 		} catch (IOException e) {		
 			e.printStackTrace();
 		
+		}
+		}else{
+			try{
+			ListenerClient c = new ListenerClient(new Socket("http://google.fr", 80),this);
+			}catch (IOException e){
+				
+			}
 		}
 
 	}

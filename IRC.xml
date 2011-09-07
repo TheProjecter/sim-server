@@ -1,5 +1,5 @@
 
-<rules port="6667"  UI="UIPushState" type="server">
+<rules port="6667"  UI="UIPushState" type="server" mode="TCP">
 
 
 	<state id="0" >
