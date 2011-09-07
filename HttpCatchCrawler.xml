@@ -1,14 +1,14 @@
 
 <rules port="81" mode="TCP">
 	<state id="0" >
-		<condition regex="GET /(.*) HTTP(.*)" tostate="1" >
+		<condition function="regex" arg1="GET /(.*) HTTP(.*)" tostate="1" >
 			<action name="PlaySound" arg1="test.wav"></action>
 			<action name="SetVar" arg1="page" arg2="@G=1="/>
 			<action name="StoreToFile" arg1="log.txt" arg2="@G=1=\r\n"/>
 			</condition>		
 	</state>
 	<state id="1" >
-		<condition regex="\r\n" tostate="0" >
+		<condition function="regex" arg1="\r\n" tostate="0" >
 				<action name="SendMessage" arg1="HTTP/1.0 200 OK\n"></action>
 				<action name="SendMessage" arg1="Content-Type : text/HTML\n"></action>
 				<action name="SendMessage" arg1="\n\n"></action>

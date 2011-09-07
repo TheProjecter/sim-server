@@ -2,7 +2,7 @@
 <rules port="25" mode="TCP">
 
 	<state id="0" >
-			<condition regex="" tostate="1" >
+			<condition function="regex" arg1="" tostate="1" >
 				<action name="SendMessage" arg1="220 localhost SMTP Ready\n"></action>
 			</condition>
 	
@@ -10,7 +10,7 @@
 	
 	<state id="1">
 	
-		<condition regex="EHLO (.*)\n" tostate="2" >
+		<condition function="regex" arg1="EHLO (.*)\n" tostate="2" >
 			<action name="SendMessage" arg1="250 @G=1=\n"></action>
    		</condition>
    		
@@ -20,31 +20,31 @@
 	
 	
 	<state id="2">
-		<condition regex="" tostate="3">
+		<condition function="regex" arg1="" tostate="3">
 			<action name="PipeToFile" arg1="test.txt"></action>
 		</condition>
 	</state>
 	
 	
 	<state id="3">
-		<condition regex="MAIL FROM:(.*)\n" >
+		<condition function="regex" arg1="MAIL FROM:(.*)\n" >
 				<action name="SendMessage" arg1="250 OK\n"></action>
 	   	</condition>
 	   	
-	   	<condition regex="RCPT TO:(.*)\n" >
+	   	<condition function="regex" arg1="RCPT TO:(.*)\n" >
 				<action name="SendMessage" arg1="250 OK\n"></action>
 	   	</condition>
 	   	
 	   	
-	   	<condition regex="DATA\n" >
+	   	<condition function="regex" arg1="DATA\n" >
 				<action name="SendMessage" arg1="354 Start mail input; end with gtCRLF\n"></action>
 	   	</condition>
 	   	
-	   	<condition regex="(.*)CRLF.CRLF(.*)" >
+	   	<condition function="regex" arg1="(.*)CRLF.CRLF(.*)" >
 				<action name="SendMessage" arg1="250 OK\n"></action>
 	   	</condition>
 	   	
-	   	<condition regex="QUIT" >
+	   	<condition function="regex" arg1="QUIT" >
 				<action name="CloseConnection"></action>
 	   	</condition>
    	
