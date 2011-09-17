@@ -35,7 +35,7 @@ public class ListenerServer extends JFrame{
 			objectUI.start(this);
 			}catch( Exception e){
 				System.out.println("invalid UI" + GUIName +" exception:"+e);
-				
+				e.printStackTrace();
 			}
 		
 			

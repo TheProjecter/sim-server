@@ -17,7 +17,13 @@ public class Launch {
 		//generate Conditions
 		LinkedList<Condition> protocol;
 		try {
-			GenerateProtocol gp= new GenerateProtocol("IRC.xml");
+			GenerateProtocol gp;
+			if (args.length>0){
+				
+				gp = new GenerateProtocol(args[0]);
+			}else{
+				 gp= new GenerateProtocol("IRC.xml");
+			}
 			protocol = gp.getCondition();
 			
 		//	System.out.println("nombre de regle:"+protocol.size());
